@@ -16,7 +16,7 @@
 		"intl",
 		"i18n"
 	],
-	"main": "./lib/ReactMessageFormatter.js",
+	"main": "./lib/IcuMessageFormatter.js",
 	"scripts": {
 		"lint": "eslint \"**/*.js\"",
 		"test": "npm run lint && jest",
@@ -25,17 +25,24 @@
 		"prepublishOnly": "npm run build"
 	},
 	"peerDependencies": {
-		"@ultraq/icu-message-formatter": "^0.5.0"
+		"@ultraq/icu-message-formatter": "^0.5.0",
+		"prop-types": "15",
+		"react": "16"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.10.3",
 		"@babel/core": "^7.10.3",
 		"@babel/preset-env": "^7.10.3",
 		"@ultraq/icu-message-formatter": "^0.5.0",
+		"babel-eslint": "^10.1.0",
 		"coveralls": "^3.1.0",
 		"eslint": "^7.3.1",
 		"eslint-config-ultraq": "^2.3.3",
+		"eslint-plugin-import": "^2.21.2",
+		"eslint-plugin-react": "^7.20.0",
 		"intl": "^1.2.5",
-		"jest": "^26.1.0"
+		"jest": "^26.1.0",
+		"prop-types": "^15.7.2",
+		"react": "^16.13.1"
 	}
 }
