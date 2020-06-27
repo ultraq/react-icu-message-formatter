@@ -1,0 +1,41 @@
+{
+	"name": "react-icu-message-formatter",
+	"version": "0.1.0",
+	"description": "React wrapper for the lightweight ICU message formatter",
+	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ultraq/react-icu-message-formatter.git"
+	},
+	"keywords": [
+		"react",
+		"icu",
+		"message",
+		"format",
+		"intl",
+		"i18n"
+	],
+	"main": "./lib/ReactMessageFormatter.js",
+	"scripts": {
+		"lint": "eslint \"**/*.js\"",
+		"test": "npm run lint && jest",
+		"coverage": "cat ./coverage/lcov.info | coveralls",
+		"build": "babel source --out-dir lib --source-maps --ignore \"source/**/*.test.js\"",
+		"prepublishOnly": "npm run build"
+	},
+	"peerDependencies": {
+		"@ultraq/icu-message-formatter": "^0.5.0"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.10.3",
+		"@babel/core": "^7.10.3",
+		"@babel/preset-env": "^7.10.3",
+		"@ultraq/icu-message-formatter": "^0.5.0",
+		"coveralls": "^3.1.0",
+		"eslint": "^7.3.1",
+		"eslint-config-ultraq": "^2.3.3",
+		"intl": "^1.2.5",
+		"jest": "^26.1.0"
+	}
+}
