@@ -1,11 +1,10 @@
 
-import MessageFormatter                  from '@ultraq/icu-message-formatter';
-import PropTypes                         from 'prop-types';
-import React, {Component, createContext} from 'react';
+import FormatterContext from './contexts/FormatterContext.js';
+import LocaleContext    from './contexts/LocaleContext.js';
+import MessagesContext  from './contexts/MessagesContext.js';
 
-export const FormatterContext = createContext(new MessageFormatter());
-export const LocaleContext = createContext('en-NZ');
-export const MessagesContext = createContext({});
+import PropTypes          from 'prop-types';
+import React, {Component} from 'react';
 
 /**
  * React component that embeds the many contexts that are combined to let React
@@ -14,7 +13,7 @@ export const MessagesContext = createContext({});
  * 
  * @author Emanuel Rabina
  */
-export class MessageFormatterProvider extends Component {
+export default class MessageFormatterProvider extends Component {
 
 	static propTypes = {
 		children: PropTypes.node.isRequired,
