@@ -1,8 +1,8 @@
 
 import withMessageFormatter from './withMessageFormatter.js';
 
-import PropTypes          from 'prop-types';
-import React, {Component} from 'react';
+import PropTypes   from 'prop-types';
+import {Component} from 'react';
 
 /**
  * React wrapper for the ICU message formatter's `format` method, using the

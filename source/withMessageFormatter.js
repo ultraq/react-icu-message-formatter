@@ -13,20 +13,18 @@ import React from 'react';
  * @param {*} Component
  * @return {*}
  */
-export default function withMessageFormatter(Component) {
-	return (
-		<FormatterContext.Consumer>
-			{formatter => (
-				<LocaleContext.Consumer>
-					{locale => (
-						<MessagesContext.Consumer>
-							{messages => (
-								<Component formatter={formatter} locale={locale} messages={messages}/>
-							)}
-						</MessagesContext.Consumer>
-					)}
-				</LocaleContext.Consumer>
-			)}
-		</FormatterContext.Consumer>
-	);
-}
+export default (Component) => (props) => (
+	<FormatterContext.Consumer>
+		{formatter => (
+			<LocaleContext.Consumer>
+				{locale => (
+					<MessagesContext.Consumer>
+						{messages => (
+							<Component formatter={formatter} locale={locale} messages={messages} {...props}/>
+						)}
+					</MessagesContext.Consumer>
+				)}
+			</LocaleContext.Consumer>
+		)}
+	</FormatterContext.Consumer>
+);

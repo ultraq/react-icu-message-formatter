@@ -1,4 +1,4 @@
 
-export {MessageFormatterProvider as default} from './MessageFormatterProvider.js';
-export {withMessageFormatter as default}     from './withMessageFormatter.js';
-export {FormattedMessage as default}         from './FormattedMessage.js';
+export {default as MessageFormatterProvider} from './MessageFormatterProvider.js';
+export {default as withMessageFormatter}     from './withMessageFormatter.js';
+export {default as FormattedMessage}         from './FormattedMessage.js';
