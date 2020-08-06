@@ -16,13 +16,18 @@
 		"intl",
 		"i18n"
 	],
-	"main": "./lib/IcuMessageFormatter.js",
+	"module": "lib/react-icu-message-formatter.es.js",
+	"main": "lib/react-icu-message-formatter.cjs.js",
+	"sideEffects": false,
 	"scripts": {
 		"lint": "eslint \"**/*.js\"",
 		"test": "jest",
 		"coverage": "cat ./coverage/lcov.info | coveralls",
-		"build": "babel source --out-dir lib --source-maps --ignore \"source/**/*.test.js\"",
+		"build": "rollup --config",
 		"prepublishOnly": "npm run build"
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.11.2"
 	},
 	"peerDependencies": {
 		"@ultraq/icu-message-formatter": "^0.6.2",
@@ -30,11 +35,14 @@
 		"react": "16"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.10.3",
 		"@babel/core": "^7.10.3",
 		"@babel/plugin-proposal-class-properties": "^7.10.4",
+		"@babel/plugin-transform-runtime": "^7.11.0",
 		"@babel/preset-env": "^7.10.3",
 		"@babel/preset-react": "^7.10.4",
+		"@rollup/plugin-babel": "^5.1.0",
+		"@rollup/plugin-commonjs": "^14.0.0",
+		"@rollup/plugin-node-resolve": "^8.4.0",
 		"@ultraq/icu-message-formatter": "^0.6.2",
 		"babel-eslint": "^10.1.0",
 		"coveralls": "^3.1.0",
@@ -48,6 +56,10 @@
 		"jest": "^26.1.0",
 		"prop-types": "^15.7.2",
 		"react": "^16.13.1",
-		"react-dom": "^16.13.1"
+		"react-dom": "^16.13.1",
+		"rollup": "^2.23.0"
+	},
+	"engines": {
+		"node": ">=10"
 	}
 }
