@@ -27,9 +27,9 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 	 */
 	render() {
 
-		let {formatter, id, locale, messages, values} = this.props;
+		let {formatter, id, locale, messages, values, ...rest} = this.props;
 		return (
-			<span dangerouslySetInnerHTML={{
+			<span {...rest} dangerouslySetInnerHTML={{
 				__html: formatter.format(messages[id], values, locale)
 			}}/>
 		);

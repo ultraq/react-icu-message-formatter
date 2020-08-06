@@ -25,9 +25,9 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 	 */
 	render() {
 
-		let {formatter, id, locale, messages, values} = this.props;
+		let {formatter, id, locale, messages, values, ...rest} = this.props;
 		return (
-			<span>{formatter.format(messages[id], values, locale)}</span>
+			<span {...rest}>{formatter.format(messages[id], values, locale)}</span>
 		);
 	}
 });
