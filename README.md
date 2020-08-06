@@ -63,6 +63,10 @@ API
 
 ### MessageFormatterProvider
 
+```javascript
+import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
+```
+
 Configures the message formatting context for your application.
 
 Props:
@@ -75,6 +79,10 @@ Props:
 
 ### FormattedMessage
 
+```javascript
+import {FormattedMessage} from '@ultraq/react-icu-message-formatter';
+```
+
 React wrapper for the ICU message formatter's `format` method, using the props
 and context to pass along to that method.
 
@@ -84,6 +92,10 @@ Props:
  - **values**: optional, an object of placeholder data to fill out the message
 
 ### FormattedHtmlMessage
+
+```javascript
+import {FormattedHtmlMessage} from '@ultraq/react-icu-message-formatter';
+```
 
 React wrapper for the ICU message formatter's `format` method that allows for
 HTML to be emitted.  Only use this component for messages that you have complete
@@ -96,6 +108,10 @@ Props:
  - **values**: optional, an object of placeholder data to fill out the message
 
 ### withMessageFormatter(Component)
+
+```javascript
+import {withMessageFormatter} from '@ultraq/react-icu-message-formatter';
+```
 
 A higher-order component function, which will pass the `formatter`, `locale`,
 and `messages` values configured in the [MessageFormatterProvider](#messageformatterprovider)
