@@ -25,9 +25,9 @@ Usage
 
 Wrap your application in the `<MessageFormatterProvider>` component.  This will
 provide the message formatter context required by the other components in this
-library.  Then, anywhere in your application that has this context, use the
-`<FormattedMessage>` component to format strings from the configured message
-bundle, passing any placeholder data to it for the desired output.
+library.  Then, anywhere in your application, use the `<FormattedMessage>`
+component to format strings from the configured message bundle, passing any
+placeholder data to it for the desired output.
 
 Taking the plain JS example from the ICU Message Formatter readme, turning that
 into React would look something like this:
@@ -66,7 +66,7 @@ API
 Configures the message formatting context for your application.
 
 Props:
- - **formatter**: a `MessageFormatter` instance from the [ICU message formatter](https://github.com/ultraq/icu-message-formatter)
+ - **formatter**: a `MessageFormatter` instance from the ICU message formatter
    package
  - **locale**: the locale to pass to the `formatter` and any custom formatters
    you have configured
@@ -75,11 +75,24 @@ Props:
 
 ### FormattedMessage
 
-A React component for selecting the ICU message string to format.
+React wrapper for the ICU message formatter's `format` method, using the props
+and context to pass along to that method.
 
 Props:
- - **id**: the value of the key from the configured [`messages`](#messageformatterprovider)
-   to use as the message that you wish to have formatted for display
+ - **id**: the value of the key from the configured `messages` to use as the
+   message that you wish to have formatted for display
+ - **values**: optional, an object of placeholder data to fill out the message
+
+### FormattedHtmlMessage
+
+React wrapper for the ICU message formatter's `format` method that allows for
+HTML to be emitted.  Only use this component for messages that you have complete
+control over (ie: not user-entered strings), otherwise you open yourself up to
+XSS attacks.
+
+Props:
+ - **id**: the value of the key from the configured `messages` to use as the
+   message that you wish to have formatted for display
  - **values**: optional, an object of placeholder data to fill out the message
 
 ### withMessageFormatter(Component)
