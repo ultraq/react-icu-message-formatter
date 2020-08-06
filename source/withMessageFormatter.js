@@ -10,6 +10,7 @@ import React from 'react';
  * objects, `formatter`, `locale`, and `messages` to the given component as
  * props.
  * 
+ * @author Emanuel Rabina
  * @param {*} Component
  * @return {*}
  */
