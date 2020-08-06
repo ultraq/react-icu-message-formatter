@@ -25,20 +25,36 @@ Usage
 
 Wrap your application in the `<MessageFormatterProvider>` component.  This will
 provide the message formatter context required by the other components in this
-library:
+library.  Then, anywhere in your application that has this context, use the
+`<FormattedMessage>` component to format strings from the configured message
+bundle, passing any placeholder data to it for the desired output.
+
+Taking the plain JS example from the ICU Message Formatter readme, turning that
+into React would look something like this:
 
 ```jsx
-import MessageFormatter           from '@ultraq/icu-message-formatter'; 
+import MessageFormatter from '@ultraq/icu-message-formatter'; 
 import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
+import {toCurrencyString} from 'my-custom-currency-library';
 
-const formatter = new MessageFormatter();
+let formatter = new MessageFormatter({
+  currency: ({value, currency}, options, values, locale) => toCurrencyString(value, currency, locale)
+});
 const messages = {
-  GREETING: 'Hi there! 👋'
+  EXAMPLE: 'Hey {name}, that\'s gonna cost you {amount, currency}!'
 };
 
 <MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
-  <FormattedMessage id="GREETING"/>
+  <FormattedMessage id="EXAMPLE" values={{
+    name: 'Emanuel',
+    amount: {
+      value: 2,
+      currency: 'GBP'
+    }
+  }}/>
 </MessageFormatterProvider>
+
+// App will output "Hey Emanuel, that's gonna cost you £2.00!"
 ```
 
 

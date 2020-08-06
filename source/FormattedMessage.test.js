@@ -12,15 +12,28 @@ import React            from 'react';
 describe('FormattedMessage', function() {
 
 	test('Documentation example', function() {
-		const formatter = new MessageFormatter();
+		let formatter = new MessageFormatter({
+			currency: ({value, currency}, options, values, locale) => {
+				return new Intl.NumberFormat(locale, {
+					style: 'currency',
+					currency
+				}).format(value);
+			}
+		});
 		const messages = {
-			GREETING: 'Hi there! 👋'
+			EXAMPLE: 'Hey {name}, that\'s gonna cost you {amount, currency}!'
 		};
 		const wrapper = mount(
 			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
-				<FormattedMessage id="GREETING"/>
+				<FormattedMessage id="EXAMPLE" values={{
+					name: 'Emanuel',
+					amount: {
+						value: 2,
+						currency: 'GBP'
+					}
+				}}/>
 			</MessageFormatterProvider>
 		);
-		expect(wrapper.text()).toBe(messages.GREETING);
+		expect(wrapper.text()).toBe('Hey Emanuel, that\'s gonna cost you £2.00!');
 	});
 });
