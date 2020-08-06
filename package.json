@@ -25,7 +25,7 @@
 		"prepublishOnly": "npm run build"
 	},
 	"peerDependencies": {
-		"@ultraq/icu-message-formatter": "^0.5.0",
+		"@ultraq/icu-message-formatter": "^0.6.2",
 		"prop-types": "15",
 		"react": "16"
 	},
@@ -35,7 +35,7 @@
 		"@babel/plugin-proposal-class-properties": "^7.10.4",
 		"@babel/preset-env": "^7.10.3",
 		"@babel/preset-react": "^7.10.4",
-		"@ultraq/icu-message-formatter": "^0.5.0",
+		"@ultraq/icu-message-formatter": "^0.6.2",
 		"babel-eslint": "^10.1.0",
 		"coveralls": "^3.1.0",
 		"enzyme": "^3.11.0",

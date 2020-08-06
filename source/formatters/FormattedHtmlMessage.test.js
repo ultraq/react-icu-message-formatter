@@ -17,9 +17,9 @@
 import FormattedHtmlMessage     from './FormattedHtmlMessage.js';
 import MessageFormatterProvider from '../MessageFormatterProvider.js';
 
-import MessageFormatter from '@ultraq/icu-message-formatter';
-import {mount}          from 'enzyme';
-import React            from 'react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
+import {mount}            from 'enzyme';
+import React              from 'react';
 
 /**
  * Tests for the HTML variant of the formatter component.

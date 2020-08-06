@@ -33,7 +33,7 @@ Taking the plain JS example from the ICU Message Formatter readme, turning that
 into React would look something like this:
 
 ```jsx
-import MessageFormatter from '@ultraq/icu-message-formatter'; 
+import {MessageFormatter} from '@ultraq/icu-message-formatter'; 
 import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 import {toCurrencyString} from 'my-custom-currency-library';
 
