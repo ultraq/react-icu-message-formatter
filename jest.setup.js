@@ -1,5 +1,5 @@
 /* eslint-env node */
-'use strict';
+'use strict'; // eslint-disable-line
 
 const Enzyme = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
