@@ -1,5 +1,5 @@
 
-import withMessageFormatter from './withMessageFormatter.js';
+import withMessageFormatter from '../withMessageFormatter.js';
 
 import PropTypes          from 'prop-types';
 import React, {Component} from 'react';

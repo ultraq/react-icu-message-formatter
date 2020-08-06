@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import FormattedMessage         from './FormattedMessage.js';
-import MessageFormatterProvider from './MessageFormatterProvider.js';
+import MessageFormatterProvider from '../MessageFormatterProvider.js';
 
 import MessageFormatter from '@ultraq/icu-message-formatter';
 import {mount}          from 'enzyme';
@@ -9,7 +9,7 @@ import React            from 'react';
 /**
  * Tests for the React message formatter component.
  */
-describe('FormattedMessage', function() {
+describe('formatters/FormattedMessage', function() {
 
 	test('Documentation example', function() {
 		let formatter = new MessageFormatter({
