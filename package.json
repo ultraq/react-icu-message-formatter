@@ -32,10 +32,14 @@
 	"devDependencies": {
 		"@babel/cli": "^7.10.3",
 		"@babel/core": "^7.10.3",
+		"@babel/plugin-proposal-class-properties": "^7.10.4",
 		"@babel/preset-env": "^7.10.3",
+		"@babel/preset-react": "^7.10.4",
 		"@ultraq/icu-message-formatter": "^0.5.0",
 		"babel-eslint": "^10.1.0",
 		"coveralls": "^3.1.0",
+		"enzyme": "^3.11.0",
+		"enzyme-adapter-react-16": "^1.15.2",
 		"eslint": "^7.3.1",
 		"eslint-config-ultraq": "^2.3.3",
 		"eslint-plugin-import": "^2.21.2",
@@ -43,6 +47,7 @@
 		"intl": "^1.2.5",
 		"jest": "^26.1.0",
 		"prop-types": "^15.7.2",
-		"react": "^16.13.1"
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
 	}
 }

@@ -28,16 +28,16 @@ provide the message formatter context required by the other components in this
 library:
 
 ```jsx
+import MessageFormatter           from '@ultraq/icu-message-formatter'; 
 import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 
+const formatter = new MessageFormatter();
 const messages = {
   GREETING: 'Hi there! 👋'
 };
 
-<MessageFormatterProvider messages={messages}>
-  <p>
-    <FormattedMessage id="GREETING"/>
-  </p>
+<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+  <FormattedMessage id="GREETING"/>
 </MessageFormatterProvider>
 ```
 
@@ -50,13 +50,12 @@ API
 Configures the message formatting context for your application.
 
 Props:
- - **formatter**: optional, a `MessageFormatter` instance from the
-   [ICU message formatter](https://github.com/ultraq/icu-message-formatter)
-   package.  Defaults to a `MessageFormatter` without any configured formatters.
- - **locale**: optional, passed as a parameter to the `formatter` and any custom
-   formatters you have configured.  Defaults to `en-NZ`.
+ - **formatter**: a `MessageFormatter` instance from the [ICU message formatter](https://github.com/ultraq/icu-message-formatter)
+   package
+ - **locale**: the locale to pass to the `formatter` and any custom formatters
+   you have configured
  - **messages**: object whose keys are used as the `id` values for identifying
-   which message to bring up and format.
+   which message to bring up and format
 
 ### FormattedMessage
 
