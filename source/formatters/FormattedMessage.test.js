@@ -27,7 +27,7 @@ import React              from 'react';
 describe('formatters/FormattedMessage', function() {
 
 	test('Documentation example', function() {
-		let formatter = new MessageFormatter({
+		const formatter = new MessageFormatter({
 			currency: ({value, currency}, options, values, locale) => {
 				return new Intl.NumberFormat(locale, {
 					style: 'currency',
@@ -50,5 +50,31 @@ describe('formatters/FormattedMessage', function() {
 			</MessageFormatterProvider>
 		);
 		expect(wrapper.text()).toBe('Hey Emanuel, that\'s gonna cost you £2.00!');
+	});
+
+	test('Nested component', function() {
+		const formatter = new MessageFormatter({
+			/* eslint-disable */
+			link: ({href}, linkText, values, locale) => (
+				<a href={href}>{linkText}</a>
+			)
+			/* eslint-enable */
+		});
+		const messages = {
+			EXTERNAL_LINK: 'Go to our {docPageLink, link, documentation page} to learn more'
+		};
+		const wrapper = mount(
+			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+				<FormattedMessage id="EXTERNAL_LINK" values={{
+					docPageLink: {
+						href: 'https://help.mywebsite.com'
+					}
+				}}/>
+			</MessageFormatterProvider>
+		);
+		const link = wrapper.find('a');
+		expect(wrapper.text()).toBe('Go to our documentation page to learn more');
+		expect(link.text()).toBe('documentation page');
+		expect(link.prop('href')).toBe('https://help.mywebsite.com');
 	});
 });

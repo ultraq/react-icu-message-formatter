@@ -16,8 +16,9 @@
 
 import withMessageFormatter from '../withMessageFormatter.js';
 
-import PropTypes          from 'prop-types';
-import React, {Component} from 'react';
+import {flatten}                    from '@ultraq/array-utils';
+import PropTypes                    from 'prop-types';
+import React, {Component, Fragment} from 'react';
 
 /**
  * React wrapper for the ICU message formatter's `format` method, using the
@@ -41,8 +42,15 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 	render() {
 
 		let {formatter, id, locale, messages, values, ...rest} = this.props;
+		let formatParts = formatter.process(messages[id], values, locale);
 		return (
-			<span {...rest}>{formatter.format(messages[id], values, locale)}</span>
+			<span {...rest}>
+				{flatten(formatParts).map((formatPart, index) => (
+					<Fragment key={index}>
+						{formatPart}
+					</Fragment>
+				))}
+			</span>
 		);
 	}
 });

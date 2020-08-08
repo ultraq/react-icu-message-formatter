@@ -40,7 +40,7 @@ import {toCurrencyString} from 'my-custom-currency-library';
 let formatter = new MessageFormatter({
   currency: ({value, currency}, options, values, locale) => toCurrencyString(value, currency, locale)
 });
-const messages = {
+let messages = {
   EXAMPLE: 'Hey {name}, that\'s gonna cost you {amount, currency}!'
 };
 
@@ -55,6 +55,40 @@ const messages = {
 </MessageFormatterProvider>
 
 // App will output "Hey Emanuel, that's gonna cost you £2.00!"
+```
+
+### Nested React components in formatted strings
+
+Since you can define your own type handlers, those handlers can also contain JSX
+content, allowing you to nest components within formatted strings.  One example
+I keep running into is having to render links for client-side routing, which can
+be done using this library:
+
+```jsx
+import {MessageFormatter} from '@ultraq/icu-message-formatter'; 
+import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
+import {Link} from 'react-router';
+
+let formatter = new MessageFormatter({
+  link: ({to}, linkText) => (
+    <Link to={to}>{linkText}</Link>
+  )
+});
+let messages = {
+  EXAMPLE: 'Go to {helpLink, link, our help pages} to learn more'
+};
+
+<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+  <FormattedMessage id="EXAMPLE" values={{
+    helpLink: {
+      to: 'https://help.mywebsite.com'
+    }
+  }}/>
+</MessageFormatterProvider>
+
+// Is the same as having written:
+// "Go to <Link to="https://help.mywebsite.com">our help pages</Link> to learn more"
+// in JSX
 ```
 
 

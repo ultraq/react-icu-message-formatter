@@ -26,6 +26,7 @@ export default {
 	],
 	external: [
 		/@babel\/runtime/,
+		'@ultraq/array-utils',
 		'@ultraq/icu-message-formatter',
 		'prop-types',
 		'react'
