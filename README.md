@@ -5,6 +5,7 @@ react-icu-message-formatter
 [![Build Status](https://travis-ci.com/ultraq/react-icu-message-formatter.svg?branch=master)](https://travis-ci.com/ultraq/react-icu-message-formatter)
 [![Coverage Status](https://coveralls.io/repos/github/ultraq/react-icu-message-formatter/badge.svg?branch=master)](https://coveralls.io/github/ultraq/react-icu-message-formatter?branch=master)
 [![npm](https://img.shields.io/npm/v/@ultraq/react-icu-message-formatter.svg?maxAge=3600)](https://www.npmjs.com/package/@ultraq/react-icu-message-formatter)
+[![Bundlephobia minified size](https://img.shields.io/bundlephobia/min/@ultraq/react-icu-message-formatter)](https://bundlephobia.com/result?p=@ultraq/react-icu-message-formatter@)
 
 A `react-intl`-inspired message formatting library, built atop the
 [lightweight ICU message formatter](https://github.com/ultraq/icu-message-formatter)
