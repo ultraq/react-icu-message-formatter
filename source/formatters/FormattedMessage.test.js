@@ -72,9 +72,24 @@ describe('formatters/FormattedMessage', function() {
 				}}/>
 			</MessageFormatterProvider>
 		);
-		const link = wrapper.find('a');
 		expect(wrapper.text()).toBe('Go to our documentation page to learn more');
+		const link = wrapper.find('a');
 		expect(link.text()).toBe('documentation page');
 		expect(link.prop('href')).toBe('https://help.mywebsite.com');
+	});
+
+	test('Message resolution', function() {
+		const formatter = new MessageFormatter();
+		const messages = {
+			GREETING: 'Hi! 👋'
+		};
+		const messageResolver = jest.fn((id, locale) => messages[id]);
+		const wrapper = mount(
+			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+				<FormattedMessage id="GREETING"/>
+			</MessageFormatterProvider>
+		);
+		expect(messageResolver).toHaveBeenCalledWith('GREETING', 'en-NZ');
+		expect(wrapper.text()).toBe(messages.GREETING);
 	});
 });

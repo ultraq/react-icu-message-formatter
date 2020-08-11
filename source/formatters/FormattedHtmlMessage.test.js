@@ -38,4 +38,19 @@ describe('formatters/FormattedHtmlMessage', function() {
 		);
 		expect(wrapper.html()).toBe(`<span>${messages.HTML_EXAMPLE}</span>`);
 	});
+
+	test('Message resolution', function() {
+		const formatter = new MessageFormatter();
+		const messages = {
+			GREETING: 'Hi! 👋'
+		};
+		const messageResolver = jest.fn((id, locale) => messages[id]);
+		const wrapper = mount(
+			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+				<FormattedHtmlMessage id="GREETING"/>
+			</MessageFormatterProvider>
+		);
+		expect(messageResolver).toHaveBeenCalledWith('GREETING', 'en-NZ');
+		expect(wrapper.text()).toBe(messages.GREETING);
+	});
 });

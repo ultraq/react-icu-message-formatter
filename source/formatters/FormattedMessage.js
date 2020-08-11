@@ -33,6 +33,7 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 		id: PropTypes.string.isRequired,
 		locale: PropTypes.string,
 		messages: PropTypes.object,
+		messageResolver: PropTypes.func,
 		values: PropTypes.object
 	};
 
@@ -41,8 +42,9 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 	 */
 	render() {
 
-		let {formatter, id, locale, messages, values, ...rest} = this.props;
-		let formatParts = formatter.process(messages[id], values, locale);
+		let {formatter, id, locale, messages, messageResolver, values, ...rest} = this.props;
+		let message = messageResolver ? messageResolver(id, locale) : messages[id];
+		let formatParts = formatter.process(message, values, locale);
 		return (
 			<span {...rest}>
 				{flatten(formatParts).map((formatPart, index) => (
