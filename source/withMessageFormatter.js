@@ -19,8 +19,8 @@ import MessageFormatterContext from './MessageFormatterContext.js';
 import React from 'react';
 
 /**
- * A higher-order component that applies the ICU Message Formatter context
- * objects, `formatter`, `locale`, `messages`, and `messageResolver` to the
+ * A higher-order component function that applies the context objects,
+ * `formatter`, `locale`, `messages`, and `messageResolver` to the
  * given component as props.
  * 
  * @author Emanuel Rabina

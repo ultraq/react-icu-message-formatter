@@ -217,8 +217,7 @@ Props:
 import {withMessageFormatter} from '@ultraq/react-icu-message-formatter';
 ```
 
-A higher-order component function, which will pass the `formatter`, `locale`,
-and `messages` values configured in the [MessageFormatterProvider](#messageformatterprovider)
-to your React component as props with those names respectively.
+A higher-order component function that applies the context objects, `formatter`,
+`locale`, `messages`, and `messageResolver` to the given component as props.
 
  - **Component**: the React component to wrap

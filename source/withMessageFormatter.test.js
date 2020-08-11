@@ -46,4 +46,25 @@ describe('withMessageFormatter', function() {
 		expect(componentProps.locale).toBe(locale);
 		expect(componentProps.messages).toBe(messages);
 	});
+
+	test('Context made available to components - messageResolver edition', function() {
+		const formatter = new MessageFormatter();
+		const locale = 'en-US';
+		const messageResolver = () => ({
+			GOODBYE: '😢'
+		});
+		const Component = () => (
+			<span>Hi! 👋</span>
+		);
+		const WrappedComponent = withMessageFormatter(Component);
+		const wrapper = mount(
+			<MessageFormatterProvider formatter={formatter} locale={locale} messageResolver={messageResolver}>
+				<WrappedComponent/>
+			</MessageFormatterProvider>
+		);
+		const componentProps = wrapper.find(Component).props();
+		expect(componentProps.formatter).toBe(formatter);
+		expect(componentProps.locale).toBe(locale);
+		expect(componentProps.messageResolver).toBe(messageResolver);
+	});
 });
