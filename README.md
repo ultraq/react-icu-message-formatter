@@ -92,6 +92,71 @@ let messages = {
 // in JSX
 ```
 
+### Message resolvers for custom message bundle handling
+
+As an application grows, it can be quite cumbersome to maintain a single large
+message bundle, so you might split it up in some way.  Some methods will let you
+be able to reconstruct the entire message bundle statically and continue to pass
+that result to the `<MessageFormatterProvider>` through the `messages` prop as
+before.  But others, like code-splitting, will be more dynamic and have you
+adding to the message bundle as your users work their way through your
+application.
+
+For these situations, `<MessageFormatterProvider>` also has a `messageResolver`
+prop, which is a function called with the message `id` and `locale` whenever a
+message needs to be retrieved for formatting.
+
+How you then manage your bundle (eg: add to it as pages are loaded, as
+components are loaded, namespace them to avoid collisions, etc), and then
+retrieve those messages (eg: the `id` prop for `<FormattedMessage>` could
+include namespaces, special path separators, etc) is up to you.  eg:
+
+```jsx
+// Messages.js
+const messageBundle = {
+  common: {
+    NEXT_PAGE: 'Next page'
+  }
+};
+
+export function addMessages(namespace, messages) {
+  messageBundle[namespace] = messages;
+}
+
+export function messageResolver(id, locale) {
+  let [namespace, key] = id.split(':');
+  return dynamicMessageBundle[namespace][key];
+}
+
+// Page1.js
+import Page1Messages from './Page1Messages.json'
+
+class Page1 extends Component {
+  componentDidMount() {
+    addMessages('page1', Page1Messages);
+  }
+  render() {
+    return (
+      <div>
+        <FormattedMessage id="page1:PAGE1_MESSAGE"/>
+        <a href="/page2.html"><FormattedMessage id="common:NEXT_PAGE"/></a>
+      </div>
+    );
+  }
+}
+
+// App.js
+import {MessageFormatter} from '@ultraq/icu-message-formatter'; 
+import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
+import {messageResolver} from './messages.js';
+
+let formatter = new MessageFormatter();
+
+<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+  <Page1/>
+</MessageFormatterProvider>
+```
+
 
 API
 ---
@@ -105,12 +170,16 @@ import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 Configures the message formatting context for your application.
 
 Props:
- - **formatter**: a `MessageFormatter` instance from the ICU message formatter
+ - **formatter**: a `MessageFormatter` instance from the `icu-message-formatter`
    package
  - **locale**: the locale to pass to the `formatter` and any custom formatters
    you have configured
  - **messages**: object whose keys are used as the `id` values for identifying
-   which message to bring up and format
+   which message to bring up and format.  Not required if `messageResolver` is
+   used.
+ - **messageResolver**: a message lookup function that is passed the `id` and
+   `locale`, called whenever a message needs to be resolved for formatting.
+   Not required if `messages` is used.
 
 ### FormattedMessage
 
