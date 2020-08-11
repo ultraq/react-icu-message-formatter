@@ -15,7 +15,7 @@
  */
 /* eslint-env jest */
 import FormattedHtmlMessage     from './FormattedHtmlMessage.js';
-import MessageFormatterProvider from '../MessageFormatterProvider.js';
+import MessageFormatterProvider from './MessageFormatterProvider.js';
 
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import {mount}            from 'enzyme';

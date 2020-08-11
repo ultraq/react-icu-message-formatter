@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import withMessageFormatter from '../withMessageFormatter.js';
+import MessageFormatterContext from './MessageFormatterContext.js';
 
 import PropTypes          from 'prop-types';
 import React, {Component} from 'react';
@@ -27,8 +27,9 @@ import React, {Component} from 'react';
  * 
  * @author Emanuel Rabina
  */
-export default withMessageFormatter(class FormattedMessage extends Component {
+export default class FormattedMessage extends Component {
 
+	static contextType = MessageFormatterContext;
 	static propTypes = {
 		formatter: PropTypes.object,
 		id: PropTypes.string.isRequired,
@@ -43,7 +44,8 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 	 */
 	render() {
 
-		let {formatter, id, locale, messages, messageResolver, values, ...rest} = this.props;
+		let {formatter, locale, messages, messageResolver} = this.context;
+		let {id, values, ...rest} = this.props;
 		let message = messageResolver ? messageResolver(id, locale) : messages[id];
 		return (
 			<span {...rest} dangerouslySetInnerHTML={{
@@ -51,4 +53,4 @@ export default withMessageFormatter(class FormattedMessage extends Component {
 			}}/>
 		);
 	}
-});
+}
