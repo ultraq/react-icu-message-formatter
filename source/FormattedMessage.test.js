@@ -24,7 +24,7 @@ import React              from 'react';
 /**
  * Tests for the React message formatter component.
  */
-describe('formatters/FormattedMessage', function() {
+describe('FormattedMessage', function() {
 
 	test('Documentation example', function() {
 		const formatter = new MessageFormatter({

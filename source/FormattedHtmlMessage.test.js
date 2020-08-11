@@ -24,7 +24,7 @@ import React              from 'react';
 /**
  * Tests for the HTML variant of the formatter component.
  */
-describe('formatters/FormattedHtmlMessage', function() {
+describe('FormattedHtmlMessage', function() {
 
 	test('Emits HTML', function() {
 		let formatter = new MessageFormatter();
