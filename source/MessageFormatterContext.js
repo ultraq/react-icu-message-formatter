@@ -30,5 +30,5 @@ export default createContext({
 	formatter: defaultFormatter,
 	locale: defaultLocale,
 	messages: defaultMessages,
-	messageResolver: () => defaultMessages
+	messageResolver: null
 });
