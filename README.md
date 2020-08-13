@@ -132,7 +132,8 @@ export function messageResolver(id, locale) {
 import Page1Messages from './Page1Messages.json'
 
 class Page1 extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     addMessages('page1', Page1Messages);
   }
   render() {
