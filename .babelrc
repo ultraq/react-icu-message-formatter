@@ -1,8 +1,4 @@
 {
-	"plugins": [
-		"@babel/plugin-proposal-class-properties",
-		"@babel/plugin-transform-runtime"
-	],
 	"presets": [
 		["@babel/preset-env", {
 			"targets": {
@@ -12,6 +8,13 @@
 			}
 		}],
 		"@babel/preset-react"
+	],
+	"plugins": [
+		"@babel/plugin-proposal-class-properties",
+		"@babel/plugin-transform-runtime",
+		["transform-react-remove-prop-types", {
+			"mode": "wrap"
+		}]
 	],
 	"env": {
 		"test": {
