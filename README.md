@@ -222,6 +222,8 @@ A hook for retrieving the message formatter context objects: `formatter`,
 `locale`, `messages`, and `messageResolver`.  Returns a single object with all
 of those properties on it.
 
+> React 16.8+ is needed to be able to use hooks.
+
 ### withMessageFormatter(Component)
 
 ```javascript
