@@ -33,7 +33,7 @@
 	"peerDependencies": {
 		"@ultraq/icu-message-formatter": "^0.7.0",
 		"prop-types": "15",
-		"react": "16"
+		"react": "^16.6.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.11.1",
