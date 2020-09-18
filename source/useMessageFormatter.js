@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
-export {default as MessageFormatterProvider} from './MessageFormatterProvider.js';
-export {default as useMessageFormatter}      from './useMessageFormatter.js';
-export {default as withMessageFormatter}     from './withMessageFormatter.js';
-export {default as FormattedMessage}         from './FormattedMessage.js';
-export {default as FormattedHtmlMessage}     from './FormattedHtmlMessage.js';
+import {useContext}            from 'react';
+import MessageFormatterContext from './MessageFormatterContext.js';
+
+/**
+ * A hook for retrieving the message formatter context objects: `formatter`,
+ * `locale`, `messages`, and `messageResolver`.
+ * 
+ * @author Emanuel Rabina
+ * @return {MessageFormatterContext}
+ */
+export default function useMessageFormatter() {
+	return useContext(MessageFormatterContext);
+}

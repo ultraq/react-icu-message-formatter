@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 /* eslint-env jest */
-import {MessageFormatter}       from '@ultraq/icu-message-formatter';
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 import withMessageFormatter     from './withMessageFormatter.js';
 
-import {mount} from 'enzyme';
-import React   from 'react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
+import {mount}            from 'enzyme';
+import React              from 'react';
 
 /**
  * Tests for the higher-order component. 
