@@ -212,6 +212,16 @@ Props:
    message that you wish to have formatted for display
  - **values**: optional, an object of placeholder data to fill out the message
 
+### useMessageFormatter()
+
+```javascript
+import {useMessageFormatter} from '@ultraq/react-icu-message-formatter';
+```
+
+A hook for retrieving the message formatter context objects: `formatter`,
+`locale`, `messages`, and `messageResolver`.  Returns a single object with all
+of those properties on it.
+
 ### withMessageFormatter(Component)
 
 ```javascript

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import {useContext}            from 'react';
 import MessageFormatterContext from './MessageFormatterContext.js';
+
+import {useContext} from 'react';
 
 /**
  * A hook for retrieving the message formatter context objects: `formatter`,
