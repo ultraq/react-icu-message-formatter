@@ -13,18 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {MessageFormatter}       from '@ultraq/icu-message-formatter';
-import MessageFormatterProvider from './MessageFormatterProvider.js';
 /* eslint-env jest */
+import MessageFormatterProvider from './MessageFormatterProvider.js';
 import useMessageFormatter      from './useMessageFormatter.js';
 
-import {mount} from 'enzyme';
-import React   from 'react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
+import {mount}            from 'enzyme';
+import React              from 'react';
 
 /**
  * Tests for the useMessageFormatter hook.
  */
 describe('useMessageFormatter', function() {
+
+	let hookOutput;
+	beforeEach(function() {
+		hookOutput = {};
+	});
+
+	function TestComponent() {
+		Object.assign(hookOutput, useMessageFormatter());
+		return null;
+	}
 
 	test('Context values are returned', function() {
 		const formatter = new MessageFormatter();
@@ -32,22 +42,39 @@ describe('useMessageFormatter', function() {
 		const messages = {
 			GOODBYE: '😢'
 		};
-
-		const hookOutput = {};
-		function TestComponent() {
-			Object.assign(hookOutput, useMessageFormatter());
-			return null;
-		}
 		mount(
 			<MessageFormatterProvider formatter={formatter} locale={locale} messages={messages}>
 				<TestComponent/>
 			</MessageFormatterProvider>
 		);
-
 		expect(hookOutput).toEqual({
 			formatter,
 			locale,
 			messages
 		});
+	});
+
+	test('Throws an error if useContext is not available', function() {
+		const useContext = React.useContext;
+		React.useContext = undefined;
+
+		const formatter = new MessageFormatter();
+		const locale = 'en-US';
+		const messages = {
+			GOODBYE: '😢'
+		};
+		expect.assertions(1);
+		try {
+			mount(
+				<MessageFormatterProvider formatter={formatter} locale={locale} messages={messages}>
+					<TestComponent/>
+				</MessageFormatterProvider>
+			);
+		}
+		catch (error) {
+			expect(error.message).toBe('You need to use React 16.8+ in order to use useContext()');
+		}
+
+		React.useContext = useContext;
 	});
 });

@@ -45,12 +45,8 @@ export default class MessageFormatterProvider extends Component {
 		super(props);
 
 		/* global process */
-		if (process.env.NODE_ENV !== 'production') {
-			if (props.messageResolver && props.messages) {
-				console.warn(
-					'messageResolver configured but messages also present.  messageResolver will take precedence.'
-				);
-			}
+		if (process.env.NODE_ENV !== 'production' && props.messageResolver && props.messages) {
+			console.warn('Both messageResolver and messages props are present - messageResolver will take precedence.');
 		}
 	}
 
