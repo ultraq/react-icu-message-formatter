@@ -45,8 +45,22 @@ export default class FormattedMessage extends Component {
 
 		let {formatter, locale, messages, messageResolver} = this.context;
 		let {id, values, ...rest} = this.props;
-		let message = messageResolver ? messageResolver(id, locale) : messages[id];
+
+		let message;
+		if (messageResolver) {
+			try {
+				message = messageResolver(id, locale);
+			}
+			catch {
+				console.error(`Failed to resolve a message for id: ${id}, locale: ${locale}.  Falling back to using an empty string.`);
+			}
+		}
+		else {
+			message = messages[id];
+		}
+
 		let formatParts = formatter.process(message, values, locale);
+
 		return (
 			<span {...rest}>
 				{flatten(formatParts).map((formatPart, index) => (

@@ -92,4 +92,24 @@ describe('FormattedMessage', function() {
 		expect(messageResolver).toHaveBeenCalledWith('GREETING', 'en-NZ');
 		expect(wrapper.text()).toBe(messages.GREETING);
 	});
+
+	test('Message resolution errors fall back to an empty string', function() {
+		const formatter = new MessageFormatter();
+		const error = new Error('Forced failure');
+		const messageResolver = jest.fn((id, locale) => {
+			throw error;
+		});
+		const consoleError = jest.spyOn(console, 'error');
+		const wrapper = mount(
+			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+				<FormattedMessage id="NOTHING"/>
+			</MessageFormatterProvider>
+		);
+		expect(messageResolver).toThrowError(error);
+		expect(consoleError).toHaveBeenCalledWith(
+			'Failed to resolve a message for id: NOTHING, locale: en-NZ.  Falling back to using an empty string.'
+		);
+		expect(wrapper.text()).toBe('');
+		consoleError.mockRestore();
+	});
 });
