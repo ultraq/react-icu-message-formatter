@@ -17,8 +17,50 @@
 import MessageFormatterContext from './MessageFormatterContext.js';
 
 import {flatten}                    from '@ultraq/array-utils';
+import {escapeHtml}                 from '@ultraq/string-utils';
 import PropTypes                    from 'prop-types';
 import React, {Component, Fragment} from 'react';
+
+/**
+ * Return a copy of the passed object whose string values have been
+ * HTML-escaped.
+ * 
+ * @param {Object} values
+ * @return {Object}
+ */
+function escapeStringValues(values) {
+	return values ? Object.keys(values).reduce((acc, key) => {
+		let value = values[key];
+		acc[key] = typeof value === 'string' ? escapeHtml(value) : value;
+		return acc;
+	}, {}) : {};
+}
+
+/**
+ * Return an array based off the passed formatting result where consecutive
+ * strings are placed into their own array so that a single HTML string,
+ * presumably an opening tag some value, and a closing tag, can be emitted in
+ * one go.
+ * 
+ * @param {Array} formatParts
+ * @return {Array}
+ */
+function groupStrings(formatParts) {
+	return flatten(formatParts).reduce((acc, part) => {
+		if (typeof part === 'string') {
+			if (acc.length > 0 && Array.isArray(acc[acc.length - 1])) {
+				acc[acc.length - 1].push(part);
+			}
+			else {
+				acc.push([part]);
+			}
+		}
+		else {
+			acc.push(part);
+		}
+		return acc;
+	}, []);
+}
 
 /**
  * React wrapper for the ICU message formatter's `format` method, using the
@@ -59,13 +101,20 @@ export default class FormattedMessage extends Component {
 			message = messages[id];
 		}
 
-		let formatParts = formatter.process(message, values, locale);
+		// String values are first escaped, sent through the formatting process, and
+		// then consecutive strings are grouped together so they can be emitted as a
+		// single HTML string.  This is because you can't emit unbalanced tags using
+		// `dangerouslySetInnerHTML`.
+		let parts = groupStrings(formatter.process(message, escapeStringValues(values), locale));
 
 		return (
 			<span {...rest}>
-				{flatten(formatParts).map((formatPart, index) => (
+				{parts.map((part, index) => (
 					<Fragment key={index}>
-						{formatPart}
+						{Array.isArray(part) ?
+							<span dangerouslySetInnerHTML={{ __html: part.join('') }}/> :
+							part
+						}
 					</Fragment>
 				))}
 			</span>

@@ -112,4 +112,20 @@ describe('FormattedMessage', function() {
 		expect(wrapper.text()).toBe('');
 		consoleError.mockRestore();
 	});
+
+	test('HTML elements in message', function() {
+		const formatter = new MessageFormatter();
+		const messages = {
+			GREETING: 'Hello <strong>{name}</strong>!'
+		};
+		const wrapper = mount(
+			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+				<FormattedMessage id="GREETING" values={{
+					name: 'Emanuel'
+				}}/>
+			</MessageFormatterProvider>
+		);
+
+		expect(wrapper.text()).toBe('Hello Emanuel!');
+	});
 });
