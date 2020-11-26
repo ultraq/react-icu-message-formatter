@@ -120,16 +120,17 @@ describe('FormattedMessage', function() {
 	test('Emits HTML', function() {
 		const formatter = new MessageFormatter();
 		const messages = {
-			GREETING: 'Hello <strong>{name}</strong>!'
+			GREETING: 'Hello <strong>{name}</strong>, your random number for the day is <strong>{randomNumber}</strong> 😉'
 		};
 		const wrapper = mount(
 			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
 				<FormattedMessage id="GREETING" values={{
-					name: 'Emanuel'
+					name: 'Emanuel',
+					randomNumber: 4 // https://xkcd.com/221/
 				}}/>
 			</MessageFormatterProvider>
 		);
 
-		expect(wrapper.text()).toBe('Hello Emanuel!');
+		expect(wrapper.html()).toBe('<span><span>Hello <strong>Emanuel</strong>, your random number for the day is <strong>4</strong> 😉</span></span>');
 	});
 });

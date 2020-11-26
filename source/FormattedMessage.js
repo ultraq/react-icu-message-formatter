@@ -47,7 +47,7 @@ function escapeStringValues(values) {
  */
 function groupStrings(formatParts) {
 	return flatten(formatParts).reduce((acc, part) => {
-		if (typeof part === 'string') {
+		if (typeof part === 'string' || typeof part === 'number') {
 			if (acc.length > 0 && Array.isArray(acc[acc.length - 1])) {
 				acc[acc.length - 1].push(part);
 			}
