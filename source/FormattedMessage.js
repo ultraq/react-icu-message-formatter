@@ -66,6 +66,10 @@ function groupStrings(formatParts) {
  * React wrapper for the ICU message formatter's `format` method, using the
  * props and context to pass along to that method.
  * 
+ * Since 0.6.0, this component also formats strings with HTML in them and
+ * automatically escapes placeholder values, replacing the `<FormattedHtmlMessage>`
+ * component which could open you up to XSS attacks.
+ * 
  * @author Emanuel Rabina
  */
 export default class FormattedMessage extends Component {

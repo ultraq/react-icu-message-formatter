@@ -30,8 +30,8 @@ library.  Then, anywhere in your application, use the `<FormattedMessage>`
 component to format strings from the configured message bundle, passing any
 placeholder data to it for the desired output.
 
-Taking the plain JS example from the ICU Message Formatter readme, turning that
-into React would look something like this:
+Taking the example from the ICU Message Formatter readme and adding a little
+HTML and React, that would look something like this:
 
 ```jsx
 import {MessageFormatter} from '@ultraq/icu-message-formatter'; 
@@ -42,7 +42,7 @@ let formatter = new MessageFormatter({
   currency: ({value, currency}, options, values, locale) => toCurrencyString(value, currency, locale)
 });
 let messages = {
-  EXAMPLE: 'Hey {name}, that\'s gonna cost you {amount, currency}!'
+  EXAMPLE: 'Hey {name}, that\'s gonna cost you <strong>{amount, currency}</strong>!'
 };
 
 <MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
@@ -55,7 +55,8 @@ let messages = {
   }}/>
 </MessageFormatterProvider>
 
-// App will output "Hey Emanuel, that's gonna cost you £2.00!"
+// The following HTML will be emitted:
+// "Hey Emanuel, that's gonna cost you <strong>£2.00</strong>!"
 ```
 
 ### Nested React components in formatted strings
@@ -191,21 +192,9 @@ import {FormattedMessage} from '@ultraq/react-icu-message-formatter';
 React wrapper for the ICU message formatter's `format` method, using the props
 and context to pass along to that method.
 
-Props:
- - **id**: the value of the key from the configured `messages` to use as the
-   message that you wish to have formatted for display
- - **values**: optional, an object of placeholder data to fill out the message
-
-### FormattedHtmlMessage
-
-```javascript
-import {FormattedHtmlMessage} from '@ultraq/react-icu-message-formatter';
-```
-
-React wrapper for the ICU message formatter's `format` method that allows for
-HTML to be emitted.  Only use this component for messages that you have complete
-control over (ie: not user-entered strings), otherwise you open yourself up to
-XSS attacks.
+Since 0.6.0, this component also formats strings with HTML in them and
+automatically escapes placeholder values, replacing the `<FormattedHtmlMessage>`
+component which could open you up to XSS attacks.
 
 Props:
  - **id**: the value of the key from the configured `messages` to use as the
