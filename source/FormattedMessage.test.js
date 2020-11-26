@@ -49,13 +49,14 @@ describe('FormattedMessage', function() {
 				}}/>
 			</MessageFormatterProvider>
 		);
+
 		expect(wrapper.text()).toBe('Hey Emanuel, that\'s gonna cost you £2.00!');
 	});
 
 	test('Nested component', function() {
 		const formatter = new MessageFormatter({
 			/* eslint-disable */
-			link: ({href}, linkText, values, locale) => (
+			link: ({href}, linkText) => (
 				<a href={href}>{linkText}</a>
 			)
 			/* eslint-enable */
@@ -72,6 +73,7 @@ describe('FormattedMessage', function() {
 				}}/>
 			</MessageFormatterProvider>
 		);
+
 		expect(wrapper.text()).toBe('Go to our documentation page to learn more');
 		const link = wrapper.find('a');
 		expect(link.text()).toBe('documentation page');
@@ -83,12 +85,13 @@ describe('FormattedMessage', function() {
 		const messages = {
 			GREETING: 'Hi! 👋'
 		};
-		const messageResolver = jest.fn((id, locale) => messages[id]);
+		const messageResolver = jest.fn((id) => messages[id]);
 		const wrapper = mount(
 			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
 				<FormattedMessage id="GREETING"/>
 			</MessageFormatterProvider>
 		);
+
 		expect(messageResolver).toHaveBeenCalledWith('GREETING', 'en-NZ');
 		expect(wrapper.text()).toBe(messages.GREETING);
 	});
@@ -96,15 +99,16 @@ describe('FormattedMessage', function() {
 	test('Message resolution errors fall back to an empty string', function() {
 		const formatter = new MessageFormatter();
 		const error = new Error('Forced failure');
-		const messageResolver = jest.fn((id, locale) => {
+		const messageResolver = jest.fn(() => {
 			throw error;
 		});
-		const consoleError = jest.spyOn(console, 'error');
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
 		const wrapper = mount(
 			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
 				<FormattedMessage id="NOTHING"/>
 			</MessageFormatterProvider>
 		);
+
 		expect(messageResolver).toThrowError(error);
 		expect(consoleError).toHaveBeenCalledWith(
 			'Failed to resolve a message for id: NOTHING, locale: en-NZ.  Falling back to using an empty string.'
@@ -113,7 +117,7 @@ describe('FormattedMessage', function() {
 		consoleError.mockRestore();
 	});
 
-	test('HTML elements in message', function() {
+	test('Emits HTML', function() {
 		const formatter = new MessageFormatter();
 		const messages = {
 			GREETING: 'Hello <strong>{name}</strong>!'

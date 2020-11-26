@@ -26,7 +26,7 @@ import React   from 'react';
 describe('MessageFormatterProvider', function() {
 
 	test('Warning thrown when both messageResolver and messages props are used', function() {
-		let consoleWarn = jest.spyOn(console, 'warn');
+		let consoleWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 		mount(
 			<MessageFormatterProvider messageResolver={jest.fn()} messages={{}}>
 				<div/>
