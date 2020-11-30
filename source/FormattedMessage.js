@@ -39,8 +39,8 @@ function escapeStringValues(values) {
 /**
  * Return an array based off the passed formatting result where consecutive
  * strings are placed into their own array so that a single HTML string,
- * presumably an opening tag some value, and a closing tag, can be emitted in
- * one go.
+ * presumably an opening tag, a placeholder value, and a closing tag, can be
+ * emitted in one go.
  * 
  * @param {Array} formatParts
  * @return {Array}
