@@ -109,7 +109,7 @@ export default class FormattedMessage extends Component {
 		// then consecutive strings are grouped together so they can be emitted as a
 		// single HTML string.  This is because you can't emit unbalanced tags using
 		// `dangerouslySetInnerHTML`.
-		let parts = groupStrings(formatter.process(message, escapeStringValues(values), locale));
+		let parts = groupStrings(formatter.process(message, locale, escapeStringValues(values)));
 
 		return (
 			<span {...rest}>
