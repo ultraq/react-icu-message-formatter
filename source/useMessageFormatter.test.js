@@ -55,6 +55,7 @@ describe('useMessageFormatter', function() {
 	});
 
 	test('Throws an error if useContext is not available', function() {
+		jest.spyOn(console, 'error').mockImplementation(() => {});
 		const useContext = React.useContext;
 		React.useContext = undefined;
 
@@ -76,5 +77,6 @@ describe('useMessageFormatter', function() {
 		}
 
 		React.useContext = useContext;
+		console.error.mockRestore();
 	});
 });
