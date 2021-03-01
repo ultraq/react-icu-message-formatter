@@ -30,7 +30,6 @@ export default class MessageFormatterProvider extends Component {
 	static propTypes = {
 		children: PropTypes.node.isRequired,
 		formatter: PropTypes.object,
-		locale: PropTypes.string,
 		messages: PropTypes.object,
 		messageResolver: PropTypes.func
 	};
@@ -55,12 +54,11 @@ export default class MessageFormatterProvider extends Component {
 	 */
 	render() {
 
-		let {children, formatter, locale, messages, messageResolver} = this.props;
+		let {children, formatter, messages, messageResolver} = this.props;
 
 		return (
 			<MessageFormatterContext.Provider value={{
 				formatter,
-				locale,
 				messages,
 				messageResolver
 			}}>

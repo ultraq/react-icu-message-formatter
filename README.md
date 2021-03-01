@@ -38,14 +38,14 @@ import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 import {toCurrencyString} from 'my-custom-currency-library';
 
-let formatter = new MessageFormatter({
+let formatter = new MessageFormatter('en-NZ', {
   currency: ({value, currency}, options, values, locale) => toCurrencyString(value, currency, locale)
 });
 let messages = {
   EXAMPLE: 'Hey {name}, that\'s gonna cost you <strong>{amount, currency}</strong>!'
 };
 
-<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+<MessageFormatterProvider formatter={formatter} messages={messages}>
   <FormattedMessage id="EXAMPLE" values={{
     name: 'Emanuel',
     amount: {
@@ -71,7 +71,7 @@ import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 import {Link} from 'react-router';
 
-let formatter = new MessageFormatter({
+let formatter = new MessageFormatter('en-NZ', {
   link: ({to}, linkText) => (
     <Link to={to}>{linkText}</Link>
   )
@@ -80,7 +80,7 @@ let messages = {
   EXAMPLE: 'Go to {helpLink, link, our help pages} to learn more'
 };
 
-<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+<MessageFormatterProvider formatter={formatter} messages={messages}>
   <FormattedMessage id="EXAMPLE" values={{
     helpLink: {
       to: 'https://help.mywebsite.com'
@@ -126,7 +126,7 @@ export function addMessages(namespace, messages) {
 
 export function messageResolver(id, locale) {
   let [namespace, key] = id.split(':');
-  return dynamicMessageBundle[namespace][key];
+  return messageBundle[namespace][key];
 }
 
 // Page1.js
@@ -152,9 +152,9 @@ import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 import {messageResolver} from './messages.js';
 
-let formatter = new MessageFormatter();
+let formatter = new MessageFormatter('en-NZ');
 
-<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
   <Page1/>
 </MessageFormatterProvider>
 ```
@@ -174,14 +174,13 @@ Configures the message formatting context for your application.
 Props:
  - **formatter**: a `MessageFormatter` instance from the `icu-message-formatter`
    package
- - **locale**: the locale to pass to the `formatter` and any custom formatters
-   you have configured
  - **messages**: object whose keys are used as the `id` values for identifying
    which message to bring up and format.  Not required if `messageResolver` is
    used.
- - **messageResolver**: a message lookup function that is passed the `id` and
-   `locale`, called whenever a message needs to be resolved for formatting.
-   Not required if `messages` is used.
+ - **messageResolver**: a message lookup function that is passed the `id` of the
+   message being looked up and the `locale` from the current formatter, called
+   whenever a message needs to be resolved for formatting.  Not required if
+   `messages` is used.
 
 ### FormattedMessage
 
@@ -208,8 +207,8 @@ import {useMessageFormatter} from '@ultraq/react-icu-message-formatter';
 ```
 
 A hook for retrieving the message formatter context objects: `formatter`,
-`locale`, `messages`, and `messageResolver`.  Returns a single object with all
-of those properties on it.
+`messages`, and `messageResolver`.  Returns a single object with all of those
+properties on it.
 
 > React 16.8+ is needed to be able to use hooks.
 
@@ -220,6 +219,6 @@ import {withMessageFormatter} from '@ultraq/react-icu-message-formatter';
 ```
 
 A higher-order component function that applies the context objects, `formatter`,
-`locale`, `messages`, and `messageResolver` to the given component as props.
+`messages`, and `messageResolver` to the given component as props.
 
  - **Component**: the React component to wrap

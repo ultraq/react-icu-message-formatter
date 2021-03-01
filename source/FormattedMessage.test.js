@@ -27,7 +27,7 @@ import React              from 'react';
 describe('FormattedMessage', function() {
 
 	test('Documentation example', function() {
-		const formatter = new MessageFormatter({
+		const formatter = new MessageFormatter('en-NZ', {
 			currency: ({value, currency}, options, values, locale) => {
 				return new Intl.NumberFormat(locale, {
 					style: 'currency',
@@ -39,7 +39,7 @@ describe('FormattedMessage', function() {
 			EXAMPLE: 'Hey {name}, that\'s gonna cost you {amount, currency}!'
 		};
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<FormattedMessage id="EXAMPLE" values={{
 					name: 'Emanuel',
 					amount: {
@@ -54,7 +54,7 @@ describe('FormattedMessage', function() {
 	});
 
 	test('Nested component', function() {
-		const formatter = new MessageFormatter({
+		const formatter = new MessageFormatter('en-NZ', {
 			/* eslint-disable */
 			link: ({href}, linkText) => (
 				<a href={href}>{linkText}</a>
@@ -65,7 +65,7 @@ describe('FormattedMessage', function() {
 			EXTERNAL_LINK: 'Go to our {docPageLink, link, documentation page} to learn more'
 		};
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<FormattedMessage id="EXTERNAL_LINK" values={{
 					docPageLink: {
 						href: 'https://help.mywebsite.com'
@@ -81,13 +81,13 @@ describe('FormattedMessage', function() {
 	});
 
 	test('Message resolution', function() {
-		const formatter = new MessageFormatter();
+		const formatter = new MessageFormatter('en-NZ');
 		const messages = {
 			GREETING: 'Hi! 👋'
 		};
 		const messageResolver = jest.fn((id) => messages[id]);
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<FormattedMessage id="GREETING"/>
 			</MessageFormatterProvider>
 		);
@@ -97,14 +97,14 @@ describe('FormattedMessage', function() {
 	});
 
 	test('Message resolution errors fall back to an empty string', function() {
-		const formatter = new MessageFormatter();
+		const formatter = new MessageFormatter('en-NZ');
 		const error = new Error('Forced failure');
 		const messageResolver = jest.fn(() => {
 			throw error;
 		});
 		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messageResolver={messageResolver}>
+			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<FormattedMessage id="NOTHING"/>
 			</MessageFormatterProvider>
 		);
@@ -118,12 +118,12 @@ describe('FormattedMessage', function() {
 	});
 
 	test('Emits HTML', function() {
-		const formatter = new MessageFormatter();
+		const formatter = new MessageFormatter('en-NZ');
 		const messages = {
 			GREETING: 'Hello <strong>{name}</strong>, your random number for the day is <strong>{randomNumber}</strong> 😉'
 		};
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale="en-NZ" messages={messages}>
+			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<FormattedMessage id="GREETING" values={{
 					name: 'Emanuel',
 					randomNumber: 4 // https://xkcd.com/221/

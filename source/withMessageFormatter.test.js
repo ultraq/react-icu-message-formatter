@@ -27,8 +27,7 @@ import React              from 'react';
 describe('withMessageFormatter', function() {
 
 	test('Context made available to components', function() {
-		const formatter = new MessageFormatter();
-		const locale = 'en-US';
+		const formatter = new MessageFormatter('en-US');
 		const messages = {
 			GOODBYE: '😢'
 		};
@@ -37,19 +36,17 @@ describe('withMessageFormatter', function() {
 		);
 		const WrappedComponent = withMessageFormatter(Component);
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale={locale} messages={messages}>
+			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<WrappedComponent/>
 			</MessageFormatterProvider>
 		);
 		const componentProps = wrapper.find(Component).props();
 		expect(componentProps.formatter).toBe(formatter);
-		expect(componentProps.locale).toBe(locale);
 		expect(componentProps.messages).toBe(messages);
 	});
 
 	test('Context made available to components - messageResolver edition', function() {
-		const formatter = new MessageFormatter();
-		const locale = 'en-US';
+		const formatter = new MessageFormatter('en-US');
 		const messageResolver = () => ({
 			GOODBYE: '😢'
 		});
@@ -58,13 +55,12 @@ describe('withMessageFormatter', function() {
 		);
 		const WrappedComponent = withMessageFormatter(Component);
 		const wrapper = mount(
-			<MessageFormatterProvider formatter={formatter} locale={locale} messageResolver={messageResolver}>
+			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<WrappedComponent/>
 			</MessageFormatterProvider>
 		);
 		const componentProps = wrapper.find(Component).props();
 		expect(componentProps.formatter).toBe(formatter);
-		expect(componentProps.locale).toBe(locale);
 		expect(componentProps.messageResolver).toBe(messageResolver);
 	});
 });

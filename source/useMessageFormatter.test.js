@@ -37,19 +37,17 @@ describe('useMessageFormatter', function() {
 	}
 
 	test('Context values are returned', function() {
-		const formatter = new MessageFormatter();
-		const locale = 'en-US';
+		const formatter = new MessageFormatter('en-US');
 		const messages = {
 			GOODBYE: '😢'
 		};
 		mount(
-			<MessageFormatterProvider formatter={formatter} locale={locale} messages={messages}>
+			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<TestComponent/>
 			</MessageFormatterProvider>
 		);
 		expect(hookOutput).toEqual({
 			formatter,
-			locale,
 			messages
 		});
 	});
@@ -59,15 +57,14 @@ describe('useMessageFormatter', function() {
 		const useContext = React.useContext;
 		React.useContext = undefined;
 
-		const formatter = new MessageFormatter();
-		const locale = 'en-US';
+		const formatter = new MessageFormatter('en-US');
 		const messages = {
 			GOODBYE: '😢'
 		};
 		expect.assertions(1);
 		try {
 			mount(
-				<MessageFormatterProvider formatter={formatter} locale={locale} messages={messages}>
+				<MessageFormatterProvider formatter={formatter} messages={messages}>
 					<TestComponent/>
 				</MessageFormatterProvider>
 			);

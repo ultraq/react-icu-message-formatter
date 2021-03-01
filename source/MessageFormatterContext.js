@@ -17,8 +17,7 @@
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import {createContext}    from 'react';
 
-const defaultFormatter = new MessageFormatter();
-const defaultLocale = 'en-NZ';
+const defaultFormatter = new MessageFormatter('en-NZ');
 const defaultMessages = {};
 
 /**
@@ -28,7 +27,6 @@ const defaultMessages = {};
  */
 export default createContext({
 	formatter: defaultFormatter,
-	locale: defaultLocale,
 	messages: defaultMessages,
 	messageResolver: null
 });

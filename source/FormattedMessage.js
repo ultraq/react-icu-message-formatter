@@ -76,11 +76,7 @@ export default class FormattedMessage extends Component {
 
 	static contextType = MessageFormatterContext;
 	static propTypes = {
-		formatter: PropTypes.object,
 		id: PropTypes.string.isRequired,
-		locale: PropTypes.string,
-		messages: PropTypes.object,
-		messageResolver: PropTypes.func,
 		values: PropTypes.object
 	};
 
@@ -89,16 +85,16 @@ export default class FormattedMessage extends Component {
 	 */
 	render() {
 
-		let {formatter, locale, messages, messageResolver} = this.context;
+		let {formatter, messages, messageResolver} = this.context;
 		let {id, values, ...rest} = this.props;
 
 		let message;
 		if (messageResolver) {
 			try {
-				message = messageResolver(id, locale);
+				message = messageResolver(id, formatter.locale);
 			}
 			catch {
-				console.error(`Failed to resolve a message for id: ${id}, locale: ${locale}.  Falling back to using an empty string.`);
+				console.error(`Failed to resolve a message for id: ${id}, locale: ${formatter.locale}.  Falling back to using an empty string.`);
 			}
 		}
 		else {
@@ -109,7 +105,7 @@ export default class FormattedMessage extends Component {
 		// then consecutive strings are grouped together so they can be emitted as a
 		// single HTML string.  This is because you can't emit unbalanced tags using
 		// `dangerouslySetInnerHTML`.
-		let parts = groupStrings(formatter.process(message, locale, escapeStringValues(values)));
+		let parts = groupStrings(formatter.process(message, escapeStringValues(values)));
 
 		return (
 			<span {...rest}>
