@@ -20,7 +20,7 @@ import {useContext} from 'react';
 
 /**
  * A hook for retrieving the message formatter context objects: `formatter`,
- * `locale`, `messages`, and `messageResolver`.
+ * `messages`, and `messageResolver`.
  * 
  * @author Emanuel Rabina
  * @return {MessageFormatterContext}
