@@ -20,17 +20,22 @@ import React from 'react';
 
 /**
  * A higher-order component function that applies the context objects,
- * `formatter`, `locale`, `messages`, and `messageResolver` to the
- * given component as props.
+ * `formatter`, `messages`, and `messageResolver` to the given component as
+ * props.
  * 
  * @author Emanuel Rabina
  * @param {*} Component
  * @return {*}
  */
-export default (Component) => (props) => (
-	<MessageFormatterContext.Consumer>
-		{context => (
-			<Component {...props} {...context}/>
-		)}
-	</MessageFormatterContext.Consumer>
-);
+export default function withMessageFormatter(Component) {
+	const wrappedComponent = (props) => (
+		<MessageFormatterContext.Consumer>
+			{context => (
+				<Component {...props} {...context}/>
+			)}
+		</MessageFormatterContext.Consumer>
+	);
+	// Display name built as per https://reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging
+	wrappedComponent.displayName = `WithMessageFormatter(${Component.displayName || Component.name || 'Component'})`;
+	return wrappedComponent;
+}
