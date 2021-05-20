@@ -22,7 +22,6 @@
 	"scripts": {
 		"lint": "eslint \"**/*.js\"",
 		"test": "jest",
-		"coverage": "cat ./coverage/lcov.info | coveralls",
 		"build": "rollup --config",
 		"prepublishOnly": "npm run build"
 	},
@@ -51,7 +50,6 @@
 		"@ultraq/icu-message-formatter": "^0.10.0",
 		"babel-eslint": "^10.1.0",
 		"babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-		"coveralls": "^3.1.0",
 		"enzyme": "^3.11.0",
 		"enzyme-adapter-react-16": "^1.15.2",
 		"eslint": "^7.26.0",
