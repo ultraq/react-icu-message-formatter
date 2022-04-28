@@ -25,8 +25,8 @@ import React, {Component, Fragment} from 'react';
  * Return a copy of the passed object whose string values have been
  * HTML-escaped.
  * 
- * @param {Object} values
- * @return {Object}
+ * @param {Record<string,any>} values
+ * @return {Record<string,any>}
  */
 function escapeStringValues(values) {
 	return values ? Object.keys(values).reduce((acc, key) => {
@@ -42,8 +42,8 @@ function escapeStringValues(values) {
  * presumably an opening tag, a placeholder value, and a closing tag, can be
  * emitted in one go.
  * 
- * @param {Array} formatParts
- * @return {Array}
+ * @param {string[]} formatParts
+ * @return {string[]}
  */
 function groupStrings(formatParts) {
 	return flatten(formatParts).reduce((acc, part) => {
@@ -81,7 +81,7 @@ export default class FormattedMessage extends Component {
 	};
 
 	/**
-	 * @return {*}
+	 * @return {JSX.Element}
 	 */
 	render() {
 

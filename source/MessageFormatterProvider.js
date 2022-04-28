@@ -16,6 +16,7 @@
 
 import MessageFormatterContext from './MessageFormatterContext.js';
 
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import PropTypes          from 'prop-types';
 import React, {Component} from 'react';
 
@@ -29,7 +30,7 @@ export default class MessageFormatterProvider extends Component {
 
 	static propTypes = {
 		children: PropTypes.node.isRequired,
-		formatter: PropTypes.object,
+		formatter: PropTypes.instanceOf(MessageFormatter),
 		messages: PropTypes.object,
 		messageResolver: PropTypes.func
 	};
@@ -50,7 +51,7 @@ export default class MessageFormatterProvider extends Component {
 	}
 
 	/**
-	 * @return {*}
+	 * @return {JSX.Element}
 	 */
 	render() {
 

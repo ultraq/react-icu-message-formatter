@@ -24,8 +24,8 @@ import React from 'react';
  * props.
  * 
  * @author Emanuel Rabina
- * @param {*} Component
- * @return {*}
+ * @param {ComponentType<P>} Component
+ * @return {FunctionComponent<P>}
  */
 export default function withMessageFormatter(Component) {
 	const wrappedComponent = (props) => (

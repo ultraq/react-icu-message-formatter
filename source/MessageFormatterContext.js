@@ -21,9 +21,24 @@ const defaultFormatter = new MessageFormatter('en-NZ');
 const defaultMessages = {};
 
 /**
+ * @callback MessageResolver
+ * @param {string} id
+ * @param {string} locale
+ * @return {string}
+ */
+
+/**
+ * @typedef MessageFormatterContext
+ * @property {MessageFormatter} formatter
+ * @property {Record<string, any>} messages
+ * @property {MessageResolver | null} messageResolver
+ */
+
+/**
  * The default formatting context.
  * 
- * @author Emanuel Rabins
+ * @type {MessageFormatterContext}
+ * @author Emanuel Rabina
  */
 export default createContext({
 	formatter: defaultFormatter,
