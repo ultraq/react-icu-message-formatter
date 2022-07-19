@@ -17,6 +17,14 @@
 		"browser": true,
 		"es6": true
 	},
+	"rules": {
+		"import/order": [
+			"error", {
+				"groups": [["sibling", "parent"]],
+				"newlines-between": "always"
+			}
+		]
+	},
 	"settings": {
 		"react": {
 			"version": "detect"
