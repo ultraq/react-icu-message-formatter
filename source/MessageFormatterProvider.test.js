@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-env jest */
 
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 
-import {mount} from 'enzyme';
-import React   from 'react';
+import {mount}                  from 'enzyme';
+import React                    from 'react';
 
 /**
  * Tests for the message formatter context provider.

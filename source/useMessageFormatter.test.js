@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-env jest */
+
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 import useMessageFormatter      from './useMessageFormatter.js';
 
-import {MessageFormatter} from '@ultraq/icu-message-formatter';
-import {mount}            from 'enzyme';
-import React              from 'react';
+import {MessageFormatter}       from '@ultraq/icu-message-formatter';
+import {mount}                  from 'enzyme';
+import React                    from 'react';
 
 /**
  * Tests for the useMessageFormatter hook.
@@ -50,30 +50,5 @@ describe('useMessageFormatter', function() {
 			formatter,
 			messages
 		});
-	});
-
-	test('Throws an error if useContext is not available', function() {
-		jest.spyOn(console, 'error').mockImplementation(() => {});
-		const useContext = React.useContext;
-		React.useContext = undefined;
-
-		const formatter = new MessageFormatter('en-US');
-		const messages = {
-			GOODBYE: '😢'
-		};
-		expect.assertions(1);
-		try {
-			mount(
-				<MessageFormatterProvider formatter={formatter} messages={messages}>
-					<TestComponent/>
-				</MessageFormatterProvider>
-			);
-		}
-		catch (error) {
-			expect(error.message).toBe('You need to use React 16.8+ in order to use useContext()');
-		}
-
-		React.useContext = useContext;
-		console.error.mockRestore();
 	});
 });

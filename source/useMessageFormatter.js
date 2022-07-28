@@ -16,7 +16,7 @@
 
 import MessageFormatterContext from './MessageFormatterContext.js';
 
-import {useContext} from 'react';
+import {useContext}            from 'react';
 
 /**
  * A hook for retrieving the message formatter context objects: `formatter`,
@@ -26,9 +26,5 @@ import {useContext} from 'react';
  * @return {MessageFormatterContext}
  */
 export default function useMessageFormatter() {
-	/* global process */
-	if (process.env.NODE_ENV !== 'production' && typeof useContext !== 'function') {
-		throw new Error('You need to use React 16.8+ in order to use useContext()');
-	}
 	return useContext(MessageFormatterContext);
 }
