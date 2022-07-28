@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext from './MessageFormatterContext.js';
+import MessageFormatterContext          from './MessageFormatterContext.js';
 
-import {flatten}                    from '@ultraq/array-utils';
-import {escapeHtml}                 from '@ultraq/string-utils';
-import PropTypes                    from 'prop-types';
-import React, {Component, Fragment} from 'react';
+import {flatten}                        from '@ultraq/array-utils';
+import {escapeHtml}                     from '@ultraq/string-utils';
+import PropTypes                        from 'prop-types';
+import React, {Fragment, PureComponent} from 'react';
 
 /**
  * Return a copy of the passed object whose string values have been
@@ -72,7 +72,7 @@ function groupStrings(formatParts) {
  * 
  * @author Emanuel Rabina
  */
-export default class FormattedMessage extends Component {
+export default class FormattedMessage extends PureComponent {
 
 	static contextType = MessageFormatterContext;
 	static propTypes = {
