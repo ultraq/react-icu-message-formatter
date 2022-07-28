@@ -17,16 +17,6 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm test
-      - uses: coverallsapp/github-action@1.1.3
+      - uses: codecov/codecov-action@v3
         with:
-          github-token: ${{ secrets.github_token }}
-          flag-name: run-node-${{ matrix.node-version }}
-          parallel: true
-  finish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: coverallsapp/github-action@1.1.3
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true
+          directory: coverage/
