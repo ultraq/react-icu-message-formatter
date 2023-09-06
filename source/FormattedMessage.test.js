@@ -17,8 +17,8 @@
 import FormattedMessage         from './FormattedMessage.js';
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 
+import {render, screen}         from '@testing-library/react';
 import {MessageFormatter}       from '@ultraq/icu-message-formatter';
-import {mount}                  from 'enzyme';
 import React                    from 'react';
 
 /**
@@ -38,7 +38,7 @@ describe('FormattedMessage', function() {
 		const messages = {
 			EXAMPLE: 'Hey {name}, that\'s gonna cost you {amount, currency}!'
 		};
-		const wrapper = mount(
+		render(
 			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<FormattedMessage id="EXAMPLE" values={{
 					name: 'Emanuel',
@@ -50,7 +50,7 @@ describe('FormattedMessage', function() {
 			</MessageFormatterProvider>
 		);
 
-		expect(wrapper.text()).toBe('Hey Emanuel, that\'s gonna cost you £2.00!');
+		expect(screen.getByText('Hey Emanuel, that\'s gonna cost you £2.00!')).toBeInTheDocument();
 	});
 
 	test('Nested component', function() {
@@ -64,7 +64,7 @@ describe('FormattedMessage', function() {
 		const messages = {
 			EXTERNAL_LINK: 'Go to our {docPageLink, link, documentation page} to learn more'
 		};
-		const wrapper = mount(
+		const {container} = render(
 			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<FormattedMessage id="EXTERNAL_LINK" values={{
 					docPageLink: {
@@ -74,10 +74,10 @@ describe('FormattedMessage', function() {
 			</MessageFormatterProvider>
 		);
 
-		expect(wrapper.text()).toBe('Go to our documentation page to learn more');
-		const link = wrapper.find('a');
-		expect(link.text()).toBe('documentation page');
-		expect(link.prop('href')).toBe('https://help.mywebsite.com');
+		expect(container).toHaveTextContent('Go to our documentation page to learn more');
+		const link = screen.getByRole('link');
+		expect(link).toHaveTextContent('documentation page');
+		expect(link).toHaveAttribute('href', 'https://help.mywebsite.com');
 	});
 
 	test('Message resolution', function() {
@@ -86,14 +86,14 @@ describe('FormattedMessage', function() {
 			GREETING: 'Hi! 👋'
 		};
 		const messageResolver = jest.fn((id) => messages[id]);
-		const wrapper = mount(
+		render(
 			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<FormattedMessage id="GREETING"/>
 			</MessageFormatterProvider>
 		);
 
 		expect(messageResolver).toHaveBeenCalledWith('GREETING', 'en-NZ');
-		expect(wrapper.text()).toBe(messages.GREETING);
+		expect(screen.getByText(messages.GREETING)).toBeInTheDocument();
 	});
 
 	test('Message resolution errors fall back to an empty string', function() {
@@ -102,8 +102,9 @@ describe('FormattedMessage', function() {
 		const messageResolver = jest.fn(() => {
 			throw error;
 		});
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
-		const wrapper = mount(
+		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {
+		});
+		const {container} = render(
 			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<FormattedMessage id="NOTHING"/>
 			</MessageFormatterProvider>
@@ -113,7 +114,7 @@ describe('FormattedMessage', function() {
 		expect(consoleError).toHaveBeenCalledWith(
 			'Failed to resolve a message for id: NOTHING, locale: en-NZ.  Falling back to using an empty string.'
 		);
-		expect(wrapper.text()).toBe('');
+		expect(container).toHaveTextContent('');
 		consoleError.mockRestore();
 	});
 
@@ -122,7 +123,7 @@ describe('FormattedMessage', function() {
 		const messages = {
 			GREETING: 'Hello <strong>{name}</strong>, your random number for the day is <strong>{randomNumber}</strong> 😉'
 		};
-		const wrapper = mount(
+		const {asFragment} = render(
 			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<FormattedMessage id="GREETING" values={{
 					name: 'Emanuel',
@@ -131,6 +132,22 @@ describe('FormattedMessage', function() {
 			</MessageFormatterProvider>
 		);
 
-		expect(wrapper.html()).toBe('<span><span>Hello <strong>Emanuel</strong>, your random number for the day is <strong>4</strong> 😉</span></span>');
+		expect(asFragment()).toMatchInlineSnapshot(`
+<DocumentFragment>
+  <span>
+    <span>
+      Hello 
+      <strong>
+        Emanuel
+      </strong>
+      , your random number for the day is 
+      <strong>
+        4
+      </strong>
+       😉
+    </span>
+  </span>
+</DocumentFragment>
+`);
 	});
 });

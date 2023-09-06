@@ -17,12 +17,12 @@
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 import withMessageFormatter     from './withMessageFormatter.js';
 
+import {render}                 from '@testing-library/react';
 import {MessageFormatter}       from '@ultraq/icu-message-formatter';
-import {mount}                  from 'enzyme';
 import React                    from 'react';
 
 /**
- * Tests for the higher-order component. 
+ * Tests for the higher-order component.
  */
 describe('withMessageFormatter', function() {
 
@@ -31,18 +31,26 @@ describe('withMessageFormatter', function() {
 		const messages = {
 			GOODBYE: '😢'
 		};
-		const Component = () => (
-			<span>Hi! 👋</span>
-		);
-		const WrappedComponent = withMessageFormatter(Component);
-		const wrapper = mount(
+		let givenFormatter;
+		let givenMessages;
+
+		// eslint-disable-next-line react/prop-types
+		const WrappedComponent = withMessageFormatter(function Component({formatter, messages}) {
+			givenFormatter = formatter;
+			givenMessages = messages;
+			return (
+				<span>Hi! 👋</span>
+			);
+		});
+
+		render(
 			<MessageFormatterProvider formatter={formatter} messages={messages}>
 				<WrappedComponent/>
 			</MessageFormatterProvider>
 		);
-		const componentProps = wrapper.find(Component).props();
-		expect(componentProps.formatter).toBe(formatter);
-		expect(componentProps.messages).toBe(messages);
+
+		expect(givenFormatter).toBe(formatter);
+		expect(givenMessages).toBe(messages);
 	});
 
 	test('Context made available to components - messageResolver edition', function() {
@@ -50,17 +58,25 @@ describe('withMessageFormatter', function() {
 		const messageResolver = () => ({
 			GOODBYE: '😢'
 		});
-		const Component = () => (
-			<span>Hi! 👋</span>
-		);
-		const WrappedComponent = withMessageFormatter(Component);
-		const wrapper = mount(
+		let givenFormatter;
+		let givenMessageResolver;
+
+		// eslint-disable-next-line react/prop-types
+		const WrappedComponent = withMessageFormatter(function Component({formatter, messageResolver}) {
+			givenFormatter = formatter;
+			givenMessageResolver = messageResolver;
+			return (
+				<span>Hi! 👋</span>
+			);
+		});
+
+		render(
 			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<WrappedComponent/>
 			</MessageFormatterProvider>
 		);
-		const componentProps = wrapper.find(Component).props();
-		expect(componentProps.formatter).toBe(formatter);
-		expect(componentProps.messageResolver).toBe(messageResolver);
+
+		expect(givenFormatter).toBe(formatter);
+		expect(givenMessageResolver).toBe(messageResolver);
 	});
 });

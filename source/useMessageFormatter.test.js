@@ -17,36 +17,34 @@
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 import useMessageFormatter      from './useMessageFormatter.js';
 
+import {renderHook}             from '@testing-library/react-hooks';
 import {MessageFormatter}       from '@ultraq/icu-message-formatter';
-import {mount}                  from 'enzyme';
 import React                    from 'react';
 
 /**
  * Tests for the useMessageFormatter hook.
  */
 describe('useMessageFormatter', function() {
+	const formatter = new MessageFormatter('en-US');
+	const messages = {
+		GOODBYE: '😢'
+	};
 
-	let hookOutput;
-	beforeEach(function() {
-		hookOutput = {};
-	});
-
-	function TestComponent() {
-		Object.assign(hookOutput, useMessageFormatter());
-		return null;
+	// eslint-disable-next-line react/prop-types
+	function Wrapper({children}) {
+		return (
+			<MessageFormatterProvider formatter={formatter} messages={messages}>
+				{children}
+			</MessageFormatterProvider>
+		);
 	}
 
 	test('Context values are returned', function() {
-		const formatter = new MessageFormatter('en-US');
-		const messages = {
-			GOODBYE: '😢'
-		};
-		mount(
-			<MessageFormatterProvider formatter={formatter} messages={messages}>
-				<TestComponent/>
-			</MessageFormatterProvider>
-		);
-		expect(hookOutput).toEqual({
+		const {result} = renderHook(() => useMessageFormatter(), {
+			wrapper: Wrapper
+		});
+
+		expect(result.current).toEqual({
 			formatter,
 			messages
 		});
