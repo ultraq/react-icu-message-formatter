@@ -4,6 +4,7 @@
 		"plugin:import/errors",
 		"plugin:import/warnings",
 		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
 		"ultraq"
 	],
 	"parser": "@babel/eslint-parser",

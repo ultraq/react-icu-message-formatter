@@ -16,55 +16,49 @@
 
 import MessageFormatterContext from './MessageFormatterContext.js';
 
-import {MessageFormatter} from '@ultraq/icu-message-formatter';
-import PropTypes          from 'prop-types';
-import React, {Component} from 'react';
+import {MessageFormatter}      from '@ultraq/icu-message-formatter';
+import PropTypes               from 'prop-types';
+import {memo, useEffect}       from 'react';
 
 /**
  * React component that embeds the module context to let React applications use
  * the much simpler message formatting components for emitting strings.
- * 
+ *
  * @author Emanuel Rabina
+ * @param {ReactNode} children
+ * @param {MessageFormatter} formatter
+ * @param {Record<string, any>} messages
+ * @param {MessageResolver | null} messageResolver
+ * @return {JSX.Element}
  */
-export default class MessageFormatterProvider extends Component {
-
-	static propTypes = {
-		children: PropTypes.node.isRequired,
-		formatter: PropTypes.instanceOf(MessageFormatter),
-		messages: PropTypes.object,
-		messageResolver: PropTypes.func
-	};
+function MessageFormatterProvider({children, formatter, messages, messageResolver}) {
 
 	/**
-	 * Constructor, warns if prop combinations don't make sense for the library.
-	 * 
-	 * @param {Object} props
+	 * Warn if prop combinations don't make sense for the library.
 	 */
-	constructor(props) {
-
-		super(props);
-
+	useEffect(() => {
 		/* global process */
-		if (process.env.NODE_ENV !== 'production' && props.messageResolver && props.messages) {
+		if (process.env.NODE_ENV !== 'production' && messageResolver && messages) {
 			console.warn('Both messageResolver and messages props are present - messageResolver will take precedence.');
 		}
-	}
+	}, []);
 
-	/**
-	 * @return {JSX.Element}
-	 */
-	render() {
-
-		let {children, formatter, messages, messageResolver} = this.props;
-
-		return (
-			<MessageFormatterContext.Provider value={{
-				formatter,
-				messages,
-				messageResolver
-			}}>
-				{children}
-			</MessageFormatterContext.Provider>
-		);
-	}
+	return (
+		<MessageFormatterContext.Provider value={{
+			formatter,
+			messages,
+			messageResolver
+		}}>
+			{children}
+		</MessageFormatterContext.Provider>
+	);
 }
+
+MessageFormatterProvider.propTypes = {
+	children: PropTypes.node.isRequired,
+	formatter: PropTypes.instanceOf(MessageFormatter),
+	messages: PropTypes.object,
+	messageResolver: PropTypes.func
+};
+
+export default memo(MessageFormatterProvider);

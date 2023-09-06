@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext          from './MessageFormatterContext.js';
+import MessageFormatterContext      from './MessageFormatterContext.js';
 
-import {flatten}                        from '@ultraq/array-utils';
-import {escapeHtml}                     from '@ultraq/string-utils';
-import PropTypes                        from 'prop-types';
-import React, {Fragment, PureComponent} from 'react';
+import {flatten}                    from '@ultraq/array-utils';
+import {escapeHtml}                 from '@ultraq/string-utils';
+import PropTypes                    from 'prop-types';
+import {Fragment, memo, useContext} from 'react';
 
 /**
  * Return a copy of the passed object whose string values have been
  * HTML-escaped.
- * 
+ *
  * @param {Record<string,any>} values
  * @return {Record<string,any>}
  */
@@ -41,7 +41,7 @@ function escapeStringValues(values) {
  * strings are placed into their own array so that a single HTML string,
  * presumably an opening tag, a placeholder value, and a closing tag, can be
  * emitted in one go.
- * 
+ *
  * @param {string[]} formatParts
  * @return {string[]}
  */
@@ -65,59 +65,57 @@ function groupStrings(formatParts) {
 /**
  * React wrapper for the ICU message formatter's `format` method, using the
  * props and context to pass along to that method.
- * 
+ *
  * Since 0.6.0, this component also formats strings with HTML in them and
  * automatically escapes placeholder values, replacing the `<FormattedHtmlMessage>`
  * component which could open you up to XSS attacks.
- * 
+ *
  * @author Emanuel Rabina
+ * @param {string} id
+ * @param {Record<string,any>} values
+ * @param {Object} rest
+ * @return {JSX.Element}
  */
-export default class FormattedMessage extends PureComponent {
+function FormattedMessage({id, values, ...rest}) {
 
-	static contextType = MessageFormatterContext;
-	static propTypes = {
-		id: PropTypes.string.isRequired,
-		values: PropTypes.object
-	};
+	let {formatter, messages, messageResolver} = useContext(MessageFormatterContext);
 
-	/**
-	 * @return {JSX.Element}
-	 */
-	render() {
-
-		let {formatter, messages, messageResolver} = this.context;
-		let {id, values, ...rest} = this.props;
-
-		let message;
-		if (messageResolver) {
-			try {
-				message = messageResolver(id, formatter.locale);
-			}
-			catch {
-				console.error(`Failed to resolve a message for id: ${id}, locale: ${formatter.locale}.  Falling back to using an empty string.`);
-			}
+	let message;
+	if (messageResolver) {
+		try {
+			message = messageResolver(id, formatter.locale);
 		}
-		else {
-			message = messages[id];
+		catch {
+			console.error(`Failed to resolve a message for id: ${id}, locale: ${formatter.locale}.  Falling back to using an empty string.`);
 		}
-
-		// String values are first escaped, sent through the formatting process, and
-		// then consecutive strings are grouped together so they can be emitted as a
-		// single HTML string.  This is because you can't emit unbalanced tags using
-		// `dangerouslySetInnerHTML`.
-		let parts = groupStrings(formatter.process(message, escapeStringValues(values)));
-
-		return (
-			<span {...rest}>
-				{parts.map((part, index) => (
-					<Fragment key={index}>
-						{Array.isArray(part) ?
-							<span dangerouslySetInnerHTML={{ __html: part.join('') }}/> :
-							part
-						}
-					</Fragment>
-				))}
-			</span>
-		);
 	}
+	else {
+		message = messages[id];
+	}
+
+	// String values are first escaped, sent through the formatting process, and
+	// then consecutive strings are grouped together so they can be emitted as a
+	// single HTML string.  This is because you can't emit unbalanced tags using
+	// `dangerouslySetInnerHTML`.
+	let parts = groupStrings(formatter.process(message, escapeStringValues(values)));
+
+	return (
+		<span {...rest}>
+			{parts.map((part, index) => (
+				<Fragment key={index}>
+					{Array.isArray(part) ?
+						<span dangerouslySetInnerHTML={{__html: part.join('')}}/> :
+						part
+					}
+				</Fragment>
+			))}
+		</span>
+	);
 }
+
+FormattedMessage.propTypes = {
+	id: PropTypes.string.isRequired,
+	values: PropTypes.object
+};
+
+export default memo(FormattedMessage);

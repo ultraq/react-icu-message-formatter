@@ -19,7 +19,6 @@ import MessageFormatterProvider from './MessageFormatterProvider.js';
 
 import {render, screen}         from '@testing-library/react';
 import {MessageFormatter}       from '@ultraq/icu-message-formatter';
-import React                    from 'react';
 
 /**
  * Tests for the React message formatter component.
