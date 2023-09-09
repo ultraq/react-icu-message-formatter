@@ -28,6 +28,7 @@ export default {
 		'@ultraq/array-utils',
 		'@ultraq/string-utils',
 		'@ultraq/icu-message-formatter',
-		'prop-types'
+		'prop-types',
+		'react'
 	]
 };
