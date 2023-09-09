@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/react-icu-message-formatter",
-	"version": "0.10.0-beta.0",
+	"version": "0.10.0-beta.1",
 	"description": "React wrapper for the lightweight ICU message formatter",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -18,20 +18,23 @@
 	],
 	"module": "lib/react-icu-message-formatter.es.js",
 	"main": "lib/react-icu-message-formatter.cjs.js",
+	"types": "index.d.ts",
 	"sideEffects": false,
 	"scripts": {
 		"lint": "eslint \"**/*.js\"",
 		"test": "jest",
-		"build": "rollup --config --bundleConfigAsCjs",
+		"build": "npm run build:lib && npm run build:dts",
+		"build:lib": "rollup --config --bundleConfigAsCjs",
+		"build:dts": "tsc source/IcuMessageFormatter.js --allowJs --declaration --emitDeclarationOnly --outDir types",
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.22.15",
-		"@ultraq/array-utils": "^3.0.0",
-		"@ultraq/string-utils": "^2.1.0"
+		"@ultraq/array-utils": "^3.0.1",
+		"@ultraq/string-utils": "^3.0.0"
 	},
 	"peerDependencies": {
-		"@ultraq/icu-message-formatter": "^0.10.0 || ^0.11.0 || ^0.12.0",
+		"@ultraq/icu-message-formatter": "^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0",
 		"prop-types": "15",
 		"react": "^16.8.0 || 17 || 18"
 	},
@@ -51,11 +54,11 @@
 		"@testing-library/react": "^14.0.0",
 		"@types/jest": "^29.5.4",
 		"@types/react": "^18.2.21",
-		"@ultraq/icu-message-formatter": "^0.12.0",
+		"@ultraq/icu-message-formatter": "^0.13.0",
 		"babel-jest": "^29.6.4",
 		"babel-plugin-transform-react-remove-prop-types": "^0.4.24",
 		"eslint": "^8.48.0",
-		"eslint-config-ultraq": "^2.4.0",
+		"eslint-config-ultraq": "^3.1.1",
 		"eslint-plugin-import": "^2.28.1",
 		"eslint-plugin-react": "^7.33.2",
 		"jest": "^29.6.4",
@@ -64,7 +67,8 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-test-renderer": "^18.2.0",
-		"rollup": "^3.29.0"
+		"rollup": "^3.29.0",
+		"typescript": "^5.2.2"
 	},
 	"engines": {
 		"node": ">=18"

@@ -16,19 +16,24 @@
 
 import MessageFormatterContext from './MessageFormatterContext.js';
 
-import {MessageFormatter}      from '@ultraq/icu-message-formatter';
-import PropTypes               from 'prop-types';
-import {memo, useEffect}       from 'react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
+import PropTypes from 'prop-types';
+import {memo, ReactNode, useEffect} from 'react';
+
+/**
+ * @typedef {object} MessageFormatterProviderProps
+ * @property {ReactNode} children
+ * @property {MessageFormatter} formatter
+ * @property {Record<string,string>} [messages]
+ * @property {import('./MessageFormatterContext').MessageResolver | null} [messageResolver]
+ */
 
 /**
  * React component that embeds the module context to let React applications use
  * the much simpler message formatting components for emitting strings.
  *
  * @author Emanuel Rabina
- * @param {ReactNode} children
- * @param {MessageFormatter} formatter
- * @param {Record<string, any>} messages
- * @param {MessageResolver | null} messageResolver
+ * @param {MessageFormatterProviderProps} props
  * @return {JSX.Element}
  */
 function MessageFormatterProvider({children, formatter, messages, messageResolver}) {
@@ -56,7 +61,7 @@ function MessageFormatterProvider({children, formatter, messages, messageResolve
 
 MessageFormatterProvider.propTypes = {
 	children: PropTypes.node.isRequired,
-	formatter: PropTypes.instanceOf(MessageFormatter),
+	formatter: PropTypes.instanceOf(MessageFormatter).isRequired,
 	messages: PropTypes.object,
 	messageResolver: PropTypes.func
 };

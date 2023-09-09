@@ -15,10 +15,10 @@
  */
 
 import MessageFormatterProvider from './MessageFormatterProvider.js';
-import useMessageFormatter      from './useMessageFormatter.js';
+import useMessageFormatter from './useMessageFormatter.js';
 
-import {renderHook}             from '@testing-library/react';
-import {MessageFormatter}       from '@ultraq/icu-message-formatter';
+import {renderHook} from '@testing-library/react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
 
 /**
  * Tests for the useMessageFormatter hook.
@@ -29,7 +29,7 @@ describe('useMessageFormatter', function() {
 		GOODBYE: '😢'
 	};
 
-	// eslint-disable-next-line react/prop-types
+	// eslint-disable-next-line react/prop-types, jsdoc/require-jsdoc
 	function Wrapper({children}) {
 		return (
 			<MessageFormatterProvider formatter={formatter} messages={messages}>

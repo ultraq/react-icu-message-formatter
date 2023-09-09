@@ -1,8 +1,8 @@
 {
 	"extends": [
 		"eslint:recommended",
-		"plugin:import/errors",
-		"plugin:import/warnings",
+		"plugin:import/recommended",
+		"plugin:jsdoc/recommended",
 		"plugin:react/recommended",
 		"plugin:react/jsx-runtime",
 		"ultraq"
@@ -20,12 +20,9 @@
 		"jest": true
 	},
 	"rules": {
-		"import/order": [
-			"error", {
-				"groups": [["sibling", "parent"]],
-				"newlines-between": "always"
-			}
-		]
+		"jsdoc/no-undefined-types": ["error", {
+			"definedTypes": ["JSX"]
+		}]
 	},
 	"settings": {
 		"react": {

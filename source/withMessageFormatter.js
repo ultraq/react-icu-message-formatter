@@ -16,12 +16,15 @@
 
 import MessageFormatterContext from './MessageFormatterContext.js';
 
+import {ComponentType, FunctionComponent} from 'react';
+
 /**
  * A higher-order component function that applies the context objects,
  * `formatter`, `messages`, and `messageResolver` to the given component as
  * props.
  *
  * @author Emanuel Rabina
+ * @template P
  * @param {ComponentType<P>} Component
  * @return {FunctionComponent<P>}
  */

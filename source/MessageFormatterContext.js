@@ -15,7 +15,7 @@
  */
 
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
-import {createContext}    from 'react';
+import {createContext} from 'react';
 
 const defaultFormatter = new MessageFormatter('en-NZ');
 const defaultMessages = {};
@@ -30,15 +30,15 @@ const defaultMessages = {};
 /**
  * @typedef MessageFormatterContext
  * @property {MessageFormatter} formatter
- * @property {Record<string, any>} messages
- * @property {MessageResolver | null} messageResolver
+ * @property {Record<string,string>} [messages]
+ * @property {MessageResolver | null} [messageResolver]
  */
 
 /**
  * The default formatting context.
  * 
- * @type {MessageFormatterContext}
  * @author Emanuel Rabina
+ * @type {MessageFormatterContext}
  */
 export default createContext({
 	formatter: defaultFormatter,

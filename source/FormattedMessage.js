@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext      from './MessageFormatterContext.js';
+import MessageFormatterContext from './MessageFormatterContext.js';
 
-import {flatten}                    from '@ultraq/array-utils';
-import {escapeHtml}                 from '@ultraq/string-utils';
-import PropTypes                    from 'prop-types';
+import {flatten} from '@ultraq/array-utils';
+import {escapeHtml} from '@ultraq/string-utils';
+import PropTypes from 'prop-types';
 import {Fragment, memo, useContext} from 'react';
 
 /**
@@ -63,6 +63,12 @@ function groupStrings(formatParts) {
 }
 
 /**
+ * @typedef {object} FormattedMessageProps
+ * @property {string} id
+ * @property {Record<string,any>} [values]
+ */
+
+/**
  * React wrapper for the ICU message formatter's `format` method, using the
  * props and context to pass along to that method.
  *
@@ -71,9 +77,7 @@ function groupStrings(formatParts) {
  * component which could open you up to XSS attacks.
  *
  * @author Emanuel Rabina
- * @param {string} id
- * @param {Record<string,any>} values
- * @param {Object} rest
+ * @param {FormattedMessageProps} props
  * @return {JSX.Element}
  */
 function FormattedMessage({id, values, ...rest}) {
