@@ -16,7 +16,8 @@
 
 import MessageFormatterProvider from './MessageFormatterProvider.js';
 
-import {render}                 from '@testing-library/react';
+import {render} from '@testing-library/react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
 
 /**
  * Tests for the message formatter context provider.
@@ -26,7 +27,7 @@ describe('MessageFormatterProvider', function() {
 	test('Warning thrown when both messageResolver and messages props are used', function() {
 		let consoleWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 		render(
-			<MessageFormatterProvider messageResolver={jest.fn()} messages={{}}>
+			<MessageFormatterProvider formatter={new MessageFormatter('en-NZ')} messageResolver={jest.fn()} messages={{}}>
 				<div/>
 			</MessageFormatterProvider>
 		);

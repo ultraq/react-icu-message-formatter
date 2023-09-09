@@ -1,6 +1,5 @@
-
-import {babel}       from '@rollup/plugin-babel';
-import commonjs      from '@rollup/plugin-commonjs';
+import {babel} from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 
 export default {
@@ -29,7 +28,6 @@ export default {
 		'@ultraq/array-utils',
 		'@ultraq/string-utils',
 		'@ultraq/icu-message-formatter',
-		'prop-types',
-		'react'
+		'prop-types'
 	]
 };
