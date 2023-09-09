@@ -18,7 +18,7 @@ import MessageFormatterContext from './MessageFormatterContext.js';
 
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import PropTypes from 'prop-types';
-import {memo, ReactNode, useEffect} from 'react';
+import React, {memo, ReactNode, useEffect} from 'react';
 
 /**
  * @typedef {object} MessageFormatterProviderProps

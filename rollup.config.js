@@ -24,7 +24,7 @@ export default {
 		nodeResolve()
 	],
 	external: [
-		/@babel\/runtime/,
+		'@babel/runtime',
 		'@ultraq/array-utils',
 		'@ultraq/string-utils',
 		'@ultraq/icu-message-formatter',

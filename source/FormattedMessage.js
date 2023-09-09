@@ -19,7 +19,7 @@ import MessageFormatterContext from './MessageFormatterContext.js';
 import {flatten} from '@ultraq/array-utils';
 import {escapeHtml} from '@ultraq/string-utils';
 import PropTypes from 'prop-types';
-import {Fragment, HTMLProps, memo, useContext} from 'react';
+import React, {Fragment, HTMLProps, memo, useContext} from 'react';
 
 /**
  * Return a copy of the passed object whose string values have been

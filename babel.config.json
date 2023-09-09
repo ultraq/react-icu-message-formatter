@@ -8,14 +8,5 @@
 		["transform-react-remove-prop-types", {
 			"mode": "wrap"
 		}]
-	],
-	"env": {
-		"test": {
-			"presets": [
-				["@babel/preset-react", {
-					"runtime": "automatic"
-				}]
-			]
-		}
-	}
+	]
 }

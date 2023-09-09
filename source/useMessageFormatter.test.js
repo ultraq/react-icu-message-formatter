@@ -19,6 +19,7 @@ import useMessageFormatter from './useMessageFormatter.js';
 
 import {renderHook} from '@testing-library/react-hooks';
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
+import React from 'react';
 
 /**
  * Tests for the useMessageFormatter hook.
