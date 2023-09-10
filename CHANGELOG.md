@@ -2,6 +2,10 @@
 Changelog
 =========
 
+### 0.10.1
+ - Looks like a `@babel/runtime` dependency got bundled in 0.10.0, so that's
+   been removed
+
 ### 0.10.0
  - Components are now memoized as a performance optimization
    ([#7](https://github.com/ultraq/react-icu-message-formatter/issues/7))
