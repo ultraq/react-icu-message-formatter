@@ -1,7 +1,5 @@
-/* eslint-env node */
-'use strict'; // eslint-disable-line
-
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
 	collectCoverage: true,
 	collectCoverageFrom: [
 		'source/**/*.js'
@@ -24,3 +22,5 @@ module.exports = {
 	],
 	testEnvironment: 'jsdom'
 };
+
+export default config;

@@ -6,12 +6,12 @@ export default {
 	input: 'source/IcuMessageFormatter.js',
 	output: [
 		{
-			file: `lib/react-icu-message-formatter.cjs.js`,
+			file: 'dist/react-icu-message-formatter.cjs',
 			format: 'cjs',
 			sourcemap: true
 		},
 		{
-			file: `lib/react-icu-message-formatter.es.js`,
+			file: 'dist/react-icu-message-formatter.js',
 			format: 'es',
 			sourcemap: true
 		}

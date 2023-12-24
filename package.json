@@ -16,16 +16,31 @@
 		"intl",
 		"i18n"
 	],
-	"module": "lib/react-icu-message-formatter.es.js",
-	"main": "lib/react-icu-message-formatter.cjs.js",
-	"types": "index.d.ts",
+	"type": "module",
+	"module": "dist/react-icu-message-formatter.js",
+	"main": "dist/react-icu-message-formatter.cjs",
+	"types": "dist/react-icu-message-formatter.d.ts",
+	"exports": {
+		"import": {
+			"default": "./dist/react-icu-message-formatter.js",
+			"types": "./dist/react-icu-message-formatter.d.ts"
+		},
+		"require": {
+			"default": "./dist/react-icu-message-formatter.cjs",
+			"types": "./dist/react-icu-message-formatter.d.cts"
+		}
+	},
+	"files": [
+		"dist",
+		"CHANGELOG.md"
+	],
 	"sideEffects": false,
 	"scripts": {
 		"lint": "eslint \"**/*.js\"",
 		"test": "jest",
-		"build": "npm run build:lib && npm run build:dts",
-		"build:lib": "rollup --config --bundleConfigAsCjs",
-		"build:dts": "tsc source/IcuMessageFormatter.js --allowJs --declaration --emitDeclarationOnly --outDir types",
+		"build": "npm run build:dist && npm run build:dts",
+		"build:dist": "rollup --config",
+		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly dist/react-icu-message-formatter.js dist/react-icu-message-formatter.cjs",
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
@@ -33,7 +48,7 @@
 		"@ultraq/string-utils": "^3.1.0"
 	},
 	"peerDependencies": {
-		"@ultraq/icu-message-formatter": "0.10.0 - 0.14.0",
+		"@ultraq/icu-message-formatter": "0.10.0 - 0.14",
 		"prop-types": "15",
 		"react": "16.8.0 - 18"
 	},

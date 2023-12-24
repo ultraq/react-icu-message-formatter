@@ -2,6 +2,13 @@
 Changelog
 =========
 
+### 0.11.0
+ - On the road to making this pure ESM, the following internal changes have been
+   made:
+ - Added `"type": "module"` so ESM is now the default
+ - Package outputs defined using an `exports` map w/ `import` pointing to the
+   main source and `require` to a transpiled version of the source
+
 ### 0.10.1
  - Looks like a `@babel/runtime` dependency got bundled in 0.10.0, so that's
    been removed

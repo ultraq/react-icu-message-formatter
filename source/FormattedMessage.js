@@ -18,7 +18,7 @@ import MessageFormatterContext from './MessageFormatterContext.js';
 
 import {escapeHtml} from '@ultraq/string-utils';
 import PropTypes from 'prop-types';
-import React, {Fragment, HTMLProps, memo, useContext} from 'react';
+import React, {Fragment, memo, useContext} from 'react';
 
 /**
  * Return a copy of the passed object whose string values have been
@@ -62,7 +62,7 @@ function groupStrings(formatParts) {
 }
 
 /**
- * @typedef {HTMLProps<HTMLSpanElement> & { id: string; values?: Record<string,any>}} FormattedMessageProps
+ * @typedef {import('react').HTMLProps<HTMLSpanElement> & { id: string; values?: Record<string,any>}} FormattedMessageProps
  */
 
 /**
