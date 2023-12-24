@@ -34,9 +34,9 @@
 		"@ultraq/string-utils": "^3.0.0"
 	},
 	"peerDependencies": {
-		"@ultraq/icu-message-formatter": "^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0",
+		"@ultraq/icu-message-formatter": "0.10.0 - 0.14.0",
 		"prop-types": "15",
-		"react": "^16.8.0 || 17 || 18"
+		"react": "16.8.0 - 18"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.15",
