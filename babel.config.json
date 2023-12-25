@@ -1,11 +1,5 @@
 {
 	"presets": [
-		["@babel/preset-env", {
-			"targets": [
-				"defaults",
-				"maintained node versions"
-			]
-		}],
 		"@babel/preset-react"
 	],
 	"plugins": [

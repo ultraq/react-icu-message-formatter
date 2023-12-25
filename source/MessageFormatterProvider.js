@@ -42,7 +42,6 @@ function MessageFormatterProvider({children, formatter, messages, messageResolve
 	 * Warn if prop combinations don't make sense for the library.
 	 */
 	useEffect(() => {
-		/* global process */
 		if (process.env.NODE_ENV !== 'production' && messageResolver && messages) {
 			console.warn('Both messageResolver and messages props are present - messageResolver will take precedence.');
 		}
