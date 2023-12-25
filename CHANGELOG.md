@@ -5,9 +5,13 @@ Changelog
 ### 0.11.0
  - On the road to making this pure ESM, the following internal changes have been
    made:
- - Added `"type": "module"` so ESM is now the default
- - Package outputs defined using an `exports` map w/ `import` pointing to the
-   main source and `require` to a transpiled version of the source
+    - Added `"type": "module"` so ESM is now the default
+    - Package outputs defined using an `exports` map w/ `import` pointing to the
+      main source and `require` to a transpiled version of the source
+ - `prop-types` moved from `peerDependencies` to `dependencies` so it will no
+   longer throw a peer dependency warning on installation.  The component
+   `propTypes` are still wrapped, so are only included in development mode and
+   removed in production builds.
 
 ### 0.10.1
  - Looks like a `@babel/runtime` dependency got bundled in 0.10.0, so that's
