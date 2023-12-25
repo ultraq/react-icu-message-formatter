@@ -17,11 +17,6 @@
 		"jest": true,
 		"node": true
 	},
-	"rules": {
-		"jsdoc/no-undefined-types": ["error", {
-			"definedTypes": ["JSX"]
-		}]
-	},
 	"settings": {
 		"react": {
 			"version": "detect"
