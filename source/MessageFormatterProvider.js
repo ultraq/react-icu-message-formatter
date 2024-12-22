@@ -34,7 +34,7 @@ import React, {memo, useEffect} from 'react';
  *
  * @author Emanuel Rabina
  * @param {MessageFormatterProviderProps} props
- * @return {JSX.Element}
+ * @return {import('react').JSX.Element}
  */
 function MessageFormatterProvider({children, formatter, messages, messageResolver}) {
 

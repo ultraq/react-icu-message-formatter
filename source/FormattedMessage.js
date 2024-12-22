@@ -75,7 +75,7 @@ function groupStrings(formatParts) {
  *
  * @author Emanuel Rabina
  * @param {FormattedMessageProps} props
- * @return {JSX.Element}
+ * @return {import('react').JSX.Element}
  */
 function FormattedMessage({id, values, ...rest}) {
 

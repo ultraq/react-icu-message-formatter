@@ -1,12 +1,12 @@
-/* 
+/*
  * Copyright 2020, Emanuel Rabina (http://www.ultraq.net.nz/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,7 +34,6 @@ describe('withMessageFormatter', function() {
 		let givenFormatter;
 		let givenMessages;
 
-		// eslint-disable-next-line react/prop-types
 		const WrappedComponent = withMessageFormatter(function Component({formatter, messages}) {
 			givenFormatter = formatter;
 			givenMessages = messages;
@@ -61,7 +60,6 @@ describe('withMessageFormatter', function() {
 		let givenFormatter;
 		let givenMessageResolver;
 
-		// eslint-disable-next-line react/prop-types
 		const WrappedComponent = withMessageFormatter(function Component({formatter, messageResolver}) {
 			givenFormatter = formatter;
 			givenMessageResolver = messageResolver;
