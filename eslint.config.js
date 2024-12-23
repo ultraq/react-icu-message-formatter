@@ -25,7 +25,8 @@ export default [
 			sourceType: 'module'
 		},
 		rules: {
-			'import/namespace': 'off' // Disabled, reporting parsing errors
+			'import/namespace': 'off', // Disabled, reporting parsing errors
+			'react/prop-types': 'off'
 		},
 		settings: {
 			react: {

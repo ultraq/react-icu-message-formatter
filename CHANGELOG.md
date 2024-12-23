@@ -2,6 +2,11 @@
 Changelog
 =========
 
+### 0.11.1
+ - Fix `exports` so that `default` entry is last
+ - `prop-types` dependency removed - the TypeScript declaration is much better
+   for this now
+
 ### 0.11.0
  - On the road to making this pure ESM, the following internal changes have been
    made:

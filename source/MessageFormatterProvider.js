@@ -16,14 +16,12 @@
 
 import MessageFormatterContext from './MessageFormatterContext.js';
 
-import {MessageFormatter} from '@ultraq/icu-message-formatter';
-import PropTypes from 'prop-types';
 import React, {memo, useEffect} from 'react';
 
 /**
  * @typedef {object} MessageFormatterProviderProps
  * @property {import('react').ReactNode} children
- * @property {MessageFormatter} formatter
+ * @property {import('@ultraq/icu-message-formatter').MessageFormatter} formatter
  * @property {Record<string,string>} [messages]
  * @property {import('./MessageFormatterContext').MessageResolver | null} [messageResolver]
  */
@@ -57,12 +55,5 @@ function MessageFormatterProvider({children, formatter, messages, messageResolve
 		</MessageFormatterContext.Provider>
 	);
 }
-
-MessageFormatterProvider.propTypes = {
-	children: PropTypes.node.isRequired,
-	formatter: PropTypes.instanceOf(MessageFormatter).isRequired,
-	messages: PropTypes.object,
-	messageResolver: PropTypes.func
-};
 
 export default memo(MessageFormatterProvider);
