@@ -3,9 +3,6 @@
 		"@babel/preset-react"
 	],
 	"plugins": [
-		"@babel/plugin-transform-runtime",
-		["transform-react-remove-prop-types", {
-			"mode": "wrap"
-		}]
+		"@babel/plugin-transform-runtime"
 	]
 }

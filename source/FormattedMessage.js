@@ -17,7 +17,6 @@
 import MessageFormatterContext from './MessageFormatterContext.js';
 
 import {escapeHtml} from '@ultraq/string-utils';
-import PropTypes from 'prop-types';
 import React, {Fragment, memo, useContext} from 'react';
 
 /**
@@ -113,10 +112,5 @@ function FormattedMessage({id, values, ...rest}) {
 		</span>
 	);
 }
-
-FormattedMessage.propTypes = {
-	id: PropTypes.string.isRequired,
-	values: PropTypes.object
-};
 
 export default memo(FormattedMessage);
