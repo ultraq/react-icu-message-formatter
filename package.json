@@ -22,12 +22,12 @@
 	"types": "dist/react-icu-message-formatter.d.ts",
 	"exports": {
 		"import": {
-			"default": "./dist/react-icu-message-formatter.js",
-			"types": "./dist/react-icu-message-formatter.d.ts"
+			"types": "./dist/react-icu-message-formatter.d.ts",
+			"default": "./dist/react-icu-message-formatter.js"
 		},
 		"require": {
-			"default": "./dist/react-icu-message-formatter.cjs",
-			"types": "./dist/react-icu-message-formatter.d.cts"
+			"types": "./dist/react-icu-message-formatter.d.cts",
+			"default": "./dist/react-icu-message-formatter.cjs"
 		}
 	},
 	"files": [
