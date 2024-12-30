@@ -19,8 +19,8 @@ export default [
 			ecmaVersion: 2020,
 			globals: {
 				...globals.browser,
-				...globals.jest,
-				...globals.node
+				...globals.node,
+				...globals.vitest
 			},
 			sourceType: 'module'
 		},

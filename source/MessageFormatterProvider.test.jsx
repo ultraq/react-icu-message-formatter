@@ -26,9 +26,9 @@ import React from 'react';
 describe('MessageFormatterProvider', function() {
 
 	test('Warning thrown when both messageResolver and messages props are used', function() {
-		let consoleWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+		let consoleWarn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 		render(
-			<MessageFormatterProvider formatter={new MessageFormatter('en-NZ')} messageResolver={jest.fn()} messages={{}}>
+			<MessageFormatterProvider formatter={new MessageFormatter('en-NZ')} messageResolver={vi.fn()} messages={{}}>
 				<div/>
 			</MessageFormatterProvider>
 		);
