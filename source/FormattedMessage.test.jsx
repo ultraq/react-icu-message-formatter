@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import FormattedMessage from './FormattedMessage.js';
-import MessageFormatterProvider from './MessageFormatterProvider.js';
+import FormattedMessage from './FormattedMessage.jsx';
+import MessageFormatterProvider from './MessageFormatterProvider.jsx';
 
 import {render, screen} from '@testing-library/react';
 import {MessageFormatter} from '@ultraq/icu-message-formatter';

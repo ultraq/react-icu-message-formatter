@@ -1,12 +1,12 @@
-/* 
+/*
  * Copyright 2020, Emanuel Rabina (http://www.ultraq.net.nz/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export {default as FormattedMessage}         from './FormattedMessage.js';
-export {default as MessageFormatterProvider} from './MessageFormatterProvider.js';
+export {default as FormattedMessage}         from './FormattedMessage.jsx';
+export {default as MessageFormatterProvider} from './MessageFormatterProvider.jsx';
 export {default as useMessageFormatter}      from './useMessageFormatter.js';
-export {default as withMessageFormatter}     from './withMessageFormatter.js';
+export {default as withMessageFormatter}     from './withMessageFormatter.jsx';
