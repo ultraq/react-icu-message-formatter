@@ -7,8 +7,9 @@ export default defineConfig({
 		lib: {
 			entry: resolve(__dirname, 'source/IcuMessageFormatter.js'),
 			formats: ['es', 'cjs'],
-			fileName: 'icu-message-formatter'
+			fileName: 'react-icu-message-formatter'
 		},
+		minify: false,
 		sourcemap: true,
 		rollupOptions: {
 			external: [

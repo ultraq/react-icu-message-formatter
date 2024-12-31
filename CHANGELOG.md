@@ -2,6 +2,10 @@
 Changelog
 =========
 
+### 0.12.0
+ - Changed build process to using Vite in library mode
+	 ([#9](https://github.com/ultraq/react-icu-message-formatter/issues/9))
+
 ### 0.11.1
  - Fix `exports` so that `default` entry is last
  - `prop-types` dependency removed - the TypeScript declaration is much better

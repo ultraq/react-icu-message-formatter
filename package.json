@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/react-icu-message-formatter",
-	"version": "0.11.1-beta.1",
+	"version": "0.12.0-beta.1",
 	"description": "React wrapper for the lightweight ICU message formatter",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -22,9 +22,11 @@
 	"types": "dist/types/IcuMessageFormatter.d.ts",
 	"exports": {
 		"import": {
+			"types": "./dist/types/IcuMessageFormatter.d.ts",
 			"default": "./dist/react-icu-message-formatter.js"
 		},
 		"require": {
+			"types": "./dist/types/IcuMessageFormatter.d.ts",
 			"default": "./dist/react-icu-message-formatter.cjs"
 		}
 	},
@@ -34,7 +36,7 @@
 	],
 	"sideEffects": false,
 	"scripts": {
-		"lint": "eslint \"**/*.js\"",
+		"lint": "eslint \"**/*.{js,jsx}\"",
 		"test": "vitest run",
 		"build": "npm run build:dist && npm run build:dts",
 		"build:dist": "vite build",
@@ -65,7 +67,6 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-test-renderer": "^18.2.0",
-		"terser": "^5.37.0",
 		"typescript": "^5.2.2",
 		"vite": "^6.0.6",
 		"vitest": "^2.1.8"
