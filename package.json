@@ -26,7 +26,7 @@
 			"default": "./dist/react-icu-message-formatter.js"
 		},
 		"require": {
-			"types": "./dist/react-icu-message-formatter.d.ts",
+			"types": "./dist/react-icu-message-formatter.d.cts",
 			"default": "./dist/react-icu-message-formatter.cjs"
 		}
 	},
@@ -38,25 +38,27 @@
 	"scripts": {
 		"lint": "eslint \"**/*.{js,jsx}\"",
 		"test": "vitest run",
+		"typecheck": "attw --pack .",
 		"build": "npm run build:dist && npm run build:dts",
 		"build:dist": "vite build",
-		"build:dts": "tsup source/IcuMessageFormatter.js --dts-only && mv dist/IcuMessageFormatter.d.cts dist/react-icu-message-formatter.d.ts",
+		"build:dts": "tsup --entry.react-icu-message-formatter source/IcuMessageFormatter.js --dts-only --format cjs,esm",
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
 		"@ultraq/string-utils": "^3.1.0"
 	},
 	"peerDependencies": {
-		"@ultraq/icu-message-formatter": "0.10.0 - 0.14",
+		"@ultraq/icu-message-formatter": "0.15.0-beta.1",
 		"react": "16.8.0 - 18"
 	},
 	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.17.2",
 		"@formatjs/intl-locale": "^3.3.2",
 		"@formatjs/intl-numberformat": "^8.7.0",
 		"@testing-library/jest-dom": "^6.1.3",
 		"@testing-library/react": "^14.0.0",
 		"@types/react": "^18.2.21",
-		"@ultraq/icu-message-formatter": "^0.14.2",
+		"@ultraq/icu-message-formatter": "0.15.0-beta.1",
 		"@vitest/coverage-v8": "^2.1.8",
 		"cross-env": "^7.0.3",
 		"eslint": "^9.17.0",
