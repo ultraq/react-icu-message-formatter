@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/react-icu-message-formatter",
-	"version": "0.11.1-beta.1",
+	"version": "0.11.1",
 	"description": "React wrapper for the lightweight ICU message formatter",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -41,6 +41,7 @@
 		"build": "npm run build:dist && npm run build:dts",
 		"build:dist": "rollup --config",
 		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly dist/react-icu-message-formatter.js dist/react-icu-message-formatter.cjs",
+		"typecheck": "attw --pack .",
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
@@ -52,6 +53,7 @@
 		"react": "16.8.0 - 18"
 	},
 	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.17.2",
 		"@babel/core": "^7.22.15",
 		"@babel/plugin-transform-runtime": "^7.22.15",
 		"@babel/preset-react": "^7.22.15",
