@@ -1,11 +1,9 @@
 import {babel} from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
+import {defineConfig} from 'rollup';
 
-/**
- * @type {import('rollup').RollupOptions}
- */
-export default {
+export default defineConfig({
 	input: 'source/IcuMessageFormatter.js',
 	output: [
 		{
@@ -21,7 +19,13 @@ export default {
 	],
 	plugins: [
 		babel({
-			babelHelpers: 'runtime'
+			babelHelpers: 'runtime',
+			presets: [
+				'@babel/preset-react'
+			],
+			plugins: [
+				'@babel/plugin-transform-runtime'
+			]
 		}),
 		commonjs(),
 		nodeResolve()
@@ -32,4 +36,4 @@ export default {
 		'@ultraq/icu-message-formatter',
 		'react'
 	]
-};
+});

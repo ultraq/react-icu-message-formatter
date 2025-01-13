@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import MessageFormatterProvider from './MessageFormatterProvider.js';
+import MessageFormatterProvider from './MessageFormatterProvider.jsx';
 import useMessageFormatter from './useMessageFormatter.js';
 
 import {renderHook} from '@testing-library/react';

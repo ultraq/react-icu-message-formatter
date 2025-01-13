@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import FormattedMessage from './FormattedMessage.js';
-import MessageFormatterProvider from './MessageFormatterProvider.js';
+import FormattedMessage from './FormattedMessage.jsx';
+import MessageFormatterProvider from './MessageFormatterProvider.jsx';
 
 import {render, screen} from '@testing-library/react';
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
@@ -83,7 +83,7 @@ describe('FormattedMessage', function() {
 		const messages = {
 			GREETING: 'Hi! 👋'
 		};
-		const messageResolver = jest.fn((id) => messages[id]);
+		const messageResolver = vi.fn((id) => messages[id]);
 		render(
 			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>
 				<FormattedMessage id="GREETING"/>
@@ -97,10 +97,10 @@ describe('FormattedMessage', function() {
 	test('Message resolution errors fall back to an empty string', function() {
 		const formatter = new MessageFormatter('en-NZ');
 		const error = new Error('Forced failure');
-		const messageResolver = jest.fn(() => {
+		const messageResolver = vi.fn(() => {
 			throw error;
 		});
-		const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {
+		const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {
 		});
 		const {container} = render(
 			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>

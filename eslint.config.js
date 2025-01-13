@@ -19,8 +19,8 @@ export default [
 			ecmaVersion: 2020,
 			globals: {
 				...globals.browser,
-				...globals.jest,
-				...globals.node
+				...globals.node,
+				...globals.vitest
 			},
 			sourceType: 'module'
 		},
@@ -29,6 +29,7 @@ export default [
 			'react/prop-types': 'off'
 		},
 		settings: {
+			'import/resolver': 'eslint-import-resolver-typescript',
 			react: {
 				version: 'detect'
 			}
