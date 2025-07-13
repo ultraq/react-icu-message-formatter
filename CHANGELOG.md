@@ -2,6 +2,9 @@
 Changelog
 =========
 
+### 0.12.0
+ - Minimum supported version of Node is now 20
+
 ### 0.11.1
  - Fix `exports` so that `default` entry is last
  - `prop-types` dependency removed - the TypeScript declaration is much better
