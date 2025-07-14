@@ -5,7 +5,7 @@ react-icu-message-formatter
 [![Build Status](https://github.com/ultraq/react-icu-message-formatter/actions/workflows/build.yml/badge.svg)](https://github.com/ultraq/react-icu-message-formatter/actions)
 [![codecov](https://codecov.io/gh/ultraq/react-icu-message-formatter/branch/main/graph/badge.svg?token=I3UI0Y7O5Q)](https://codecov.io/gh/ultraq/react-icu-message-formatter)
 [![npm](https://img.shields.io/npm/v/@ultraq/react-icu-message-formatter.svg?maxAge=3600)](https://www.npmjs.com/package/@ultraq/react-icu-message-formatter)
-[![Bundlephobia minified size](https://img.shields.io/bundlephobia/min/@ultraq/react-icu-message-formatter)](https://bundlephobia.com/result?p=@ultraq/react-icu-message-formatter)
+[![bundlejs gzipped size](https://deno.bundlejs.com/?q=%40ultraq%2Freact-icu-message-formatter&badge)](https://bundlejs.com/?q=%40ultraq%2Freact-icu-message-formatter&bundle=true)
 
 A `react-intl`-inspired message formatting library, built atop the
 [lightweight ICU message formatter](https://github.com/ultraq/icu-message-formatter)
