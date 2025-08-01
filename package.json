@@ -45,7 +45,7 @@
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
-		"@babel/runtime": "^7.22.15",
+		"@babel/runtime": "^7.28.2",
 		"@ultraq/string-utils": "^3.1.0"
 	},
 	"peerDependencies": {
@@ -54,9 +54,9 @@
 	},
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.17.2",
-		"@babel/core": "^7.22.15",
-		"@babel/plugin-transform-runtime": "^7.22.15",
-		"@babel/preset-react": "^7.22.15",
+		"@babel/core": "^7.28.0",
+		"@babel/plugin-transform-runtime": "^7.28.0",
+		"@babel/preset-react": "^7.27.1",
 		"@formatjs/intl-locale": "^3.3.2",
 		"@formatjs/intl-numberformat": "^8.7.0",
 		"@rollup/plugin-babel": "^6.0.3",
@@ -67,8 +67,7 @@
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"@ultraq/icu-message-formatter": "^0.14.2",
-		"@vitest/coverage-v8": "^2.1.8",
-		"cross-env": "^7.0.3",
+		"@vitest/coverage-v8": "^3.2.4",
 		"eslint": "^9.17.0",
 		"eslint-config-ultraq": "^4.0.0",
 		"eslint-import-resolver-typescript": "^3.7.0",
@@ -79,7 +78,7 @@
 		"react-dom": "^19.1.0",
 		"rollup": "^4.9.1",
 		"typescript": "^5.2.2",
-		"vitest": "^2.1.8"
+		"vitest": "^3.2.4"
 	},
 	"engines": {
 		"node": ">=20"
