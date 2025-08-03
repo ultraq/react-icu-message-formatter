@@ -38,9 +38,10 @@
 	"scripts": {
 		"lint": "eslint \"**/*.js\"",
 		"test": "vitest",
-		"build": "npm run build:dist && npm run build:dts",
+		"build": "npm run build:dist && npm run build:dts && npm run build:dcts",
 		"build:dist": "rollup --config",
-		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly dist/react-icu-message-formatter.js dist/react-icu-message-formatter.cjs",
+		"build:dts": "tsc --allowJs --declaration --emitDeclarationOnly --module nodenext --moduleResolution nodenext --target es6 dist/react-icu-message-formatter.js",
+		"build:dcts": "tsc --allowJs --declaration --emitDeclarationOnly --module commonjs --moduleResolution node10 --target es6 dist/react-icu-message-formatter.cjs",
 		"typecheck": "attw --pack .",
 		"prepublishOnly": "npm run build"
 	},
@@ -53,7 +54,7 @@
 		"react": "16.8.0 - 19"
 	},
 	"devDependencies": {
-		"@arethetypeswrong/cli": "^0.17.2",
+		"@arethetypeswrong/cli": "^0.18.2",
 		"@babel/core": "^7.28.0",
 		"@babel/plugin-transform-runtime": "^7.28.0",
 		"@babel/preset-react": "^7.27.1",
