@@ -4,6 +4,7 @@ Changelog
 
 ### 0.12.0
  - Minimum supported version of Node is now 20
+ - Expanded `peerDependencies` to include React 19
 
 ### 0.11.1
  - Fix `exports` so that `default` entry is last
