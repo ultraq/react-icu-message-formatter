@@ -58,8 +58,6 @@
 		"@babel/core": "^7.28.0",
 		"@babel/plugin-transform-runtime": "^7.28.0",
 		"@babel/preset-react": "^7.27.1",
-		"@formatjs/intl-locale": "^3.3.2",
-		"@formatjs/intl-numberformat": "^8.7.0",
 		"@rollup/plugin-babel": "^6.0.3",
 		"@rollup/plugin-commonjs": "^25.0.4",
 		"@rollup/plugin-node-resolve": "^15.2.1",
