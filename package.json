@@ -1,6 +1,6 @@
 {
 	"name": "@ultraq/react-icu-message-formatter",
-	"version": "0.12.0",
+	"version": "0.13.0-beta.1",
 	"description": "React wrapper for the lightweight ICU message formatter",
 	"author": "Emanuel Rabina <emanuelrabina@gmail.com> (http://www.ultraq.net.nz/)",
 	"license": "Apache-2.0",
@@ -80,6 +80,6 @@
 		"vitest": "^3.2.4"
 	},
 	"engines": {
-		"node": ">=20"
+		"node": ">=22"
 	}
 }

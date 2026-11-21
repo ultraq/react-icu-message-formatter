@@ -2,6 +2,9 @@
 Changelog
 =========
 
+### 0.13.0
+ - Minimum supported version of Node is now 22
+
 ### 0.12.0
  - Minimum supported version of Node is now 20
  - Expanded `peerDependencies` to include React 19

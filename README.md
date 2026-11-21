@@ -39,7 +39,7 @@ import {MessageFormatterProvider} from '@ultraq/react-icu-message-formatter';
 import {toCurrencyString} from 'my-custom-currency-library';
 
 let formatter = new MessageFormatter('en-NZ', {
-  currency: ({value, currency}, options, values, locale) => toCurrencyString(value, currency, locale)
+  currency: ({value, currency}, matches, locale) => toCurrencyString(value, currency, locale)
 });
 let messages = {
   EXAMPLE: 'Hey {name}, that\'s gonna cost you <strong>{amount, currency}</strong>!'
