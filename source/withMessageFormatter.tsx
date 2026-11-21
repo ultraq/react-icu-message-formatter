@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext from './MessageFormatterContext.js';
+import MessageFormatterContext, {type MessageFormatterContextValue} from './MessageFormatterContext.ts';
 
-import React from 'react';
+import React, {type ComponentType, type FunctionComponent} from 'react';
 
 /**
  * A higher-order component function that applies the context objects,
@@ -24,12 +24,9 @@ import React from 'react';
  * props.
  *
  * @author Emanuel Rabina
- * @template P
- * @param {import('react').ComponentType<P>} Component
- * @return {import('react').FunctionComponent<P>}
  */
-export default function withMessageFormatter(Component) {
-	const wrappedComponent = (props) => (
+export default function withMessageFormatter<Props>(Component: ComponentType<Props & MessageFormatterContextValue>): FunctionComponent<Props> {
+	const wrappedComponent = (props: Props) => (
 		<MessageFormatterContext.Consumer>
 			{context => (
 				<Component {...props} {...context}/>

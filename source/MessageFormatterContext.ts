@@ -14,17 +14,27 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext from './MessageFormatterContext.js';
+import type {MessageResolver} from './Types.ts';
 
-import {useContext} from 'react';
+import {MessageFormatter} from '@ultraq/icu-message-formatter';
+import {createContext} from 'react';
+
+const defaultFormatter = new MessageFormatter('en-NZ');
+const defaultMessages = {};
+
+export type MessageFormatterContextValue = {
+	formatter: MessageFormatter,
+	messages: Record<string, string>,
+	messageResolver: MessageResolver | null
+};
 
 /**
- * A hook for retrieving the message formatter context objects: `formatter`,
- * `messages`, and `messageResolver`.
+ * The default formatting context.
  *
  * @author Emanuel Rabina
- * @return {MessageFormatterContext}
  */
-export default function useMessageFormatter() {
-	return useContext(MessageFormatterContext);
-}
+export default createContext<MessageFormatterContextValue>({
+	formatter: defaultFormatter,
+	messages: defaultMessages,
+	messageResolver: null
+});

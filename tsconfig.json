@@ -1,0 +1,26 @@
+{
+	"extends": [
+		"@tsconfig/node-lts",
+		"@tsconfig/node-ts"
+	],
+	"compilerOptions": {
+		"declaration": true,
+		"jsx": "react-jsx",
+		"lib": [
+			"DOM",
+			"ES2022"
+		],
+		"outDir": "dist",
+		"rootDir": "source",
+		"types": [
+			"@testing-library/jest-dom/vitest",
+			"node",
+			"vitest/globals"
+		]
+	},
+	"exclude": [
+		"**/*.test.*",
+		"vitest.config.ts",
+		"vitest.setup.ts"
+	]
+}

@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext from './MessageFormatterContext.js';
+import MessageFormatterContext from './MessageFormatterContext.ts';
+import type {MessageResolver} from './Types.js';
 
-import React, {memo, useEffect} from 'react';
+import type {MessageFormatter} from '@ultraq/icu-message-formatter';
+import React, {type JSX, memo, type ReactNode, useEffect} from 'react';
 
-/**
- * @typedef {object} MessageFormatterProviderProps
- * @property {import('react').ReactNode} children
- * @property {import('@ultraq/icu-message-formatter').MessageFormatter} formatter
- * @property {Record<string,string>} [messages]
- * @property {import('./MessageFormatterContext').MessageResolver | null} [messageResolver]
- */
+interface MessageFormatterProviderProps {
+	children: ReactNode;
+	formatter: MessageFormatter;
+	messages?: Record<string, string>;
+	messageResolver?: MessageResolver | null;
+}
 
 /**
  * React component that embeds the module context to let React applications use
  * the much simpler message formatting components for emitting strings.
  *
  * @author Emanuel Rabina
- * @param {MessageFormatterProviderProps} props
- * @return {import('react').JSX.Element}
  */
-function MessageFormatterProvider({children, formatter, messages, messageResolver}) {
+function MessageFormatterProvider({children, formatter, messages, messageResolver}: MessageFormatterProviderProps):
+	JSX.Element {
 
 	/**
 	 * Warn if prop combinations don't make sense for the library.
@@ -43,13 +43,13 @@ function MessageFormatterProvider({children, formatter, messages, messageResolve
 		if (process.env.NODE_ENV !== 'production' && messageResolver && messages) {
 			console.warn('Both messageResolver and messages props are present - messageResolver will take precedence.');
 		}
-	}, []);
+	}, []); // eslint-disable-line @eslint-react/exhaustive-deps
 
 	return (
 		<MessageFormatterContext.Provider value={{
 			formatter,
-			messages,
-			messageResolver
+			messages: messages ?? {},
+			messageResolver: messageResolver ?? null
 		}}>
 			{children}
 		</MessageFormatterContext.Provider>

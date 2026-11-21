@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import MessageFormatterProvider from './MessageFormatterProvider.jsx';
-import withMessageFormatter from './withMessageFormatter.jsx';
+import type {MessageFormatterContextValue} from './MessageFormatterContext.js';
+import MessageFormatterProvider from './MessageFormatterProvider.tsx';
+import withMessageFormatter from './withMessageFormatter.tsx';
 
 import {render} from '@testing-library/react';
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
@@ -31,10 +32,10 @@ describe('withMessageFormatter', function() {
 		const messages = {
 			GOODBYE: '😢'
 		};
-		let givenFormatter;
-		let givenMessages;
+		let givenFormatter = undefined;
+		let givenMessages = undefined;
 
-		const WrappedComponent = withMessageFormatter(function Component({formatter, messages}) {
+		const WrappedComponent = withMessageFormatter(function Component({formatter, messages}: MessageFormatterContextValue) {
 			givenFormatter = formatter;
 			givenMessages = messages;
 			return (
@@ -54,9 +55,7 @@ describe('withMessageFormatter', function() {
 
 	test('Context made available to components - messageResolver edition', function() {
 		const formatter = new MessageFormatter('en-US');
-		const messageResolver = () => ({
-			GOODBYE: '😢'
-		});
+		const messageResolver = () => '😢';
 		let givenFormatter;
 		let givenMessageResolver;
 

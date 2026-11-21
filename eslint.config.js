@@ -1,38 +1,43 @@
+// @ts-check
+import eslintReact from '@eslint-react/eslint-plugin';
+import {defineConfig} from 'eslint/config';
 import myConfig from 'eslint-config-ultraq';
-import reactPlugin from 'eslint-plugin-react';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-/**
- * @type {import('eslint').Linter.Config[]}
- */
-export default [
-	...myConfig,
-	reactPlugin.configs.flat.recommended,
-	{
-		ignores: [
-			'coverage/**/*',
-			'dist/**/*'
-		]
+export default defineConfig({
+	extends: [
+		...myConfig,
+		tseslint.configs.recommended,
+		eslintReact.configs['recommended-typescript']
+	],
+	ignores: [
+		'coverage/**/*',
+		'dist/**/*'
+	],
+	languageOptions: {
+		ecmaVersion: 2022,
+		globals: {
+			...globals.browser,
+			...globals.node,
+			...globals.vitest
+		},
+		sourceType: 'module'
 	},
-	{
-		languageOptions: {
-			ecmaVersion: 2020,
-			globals: {
-				...globals.browser,
-				...globals.node,
-				...globals.vitest
-			},
-			sourceType: 'module'
-		},
-		rules: {
-			'import/namespace': 'off', // Disabled, reporting parsing errors
-			'react/prop-types': 'off'
-		},
-		settings: {
-			'import/resolver': 'eslint-import-resolver-typescript',
-			react: {
-				version: 'detect'
-			}
+	rules: {
+		'@eslint-react/no-array-index-key': 'off',
+		'@eslint-react/no-context-provider': 'off',
+		'@eslint-react/no-use-context': 'off',
+		'@typescript-eslint/ban-ts-comment': 'off',
+		'jsdoc/require-param': 'off',
+		'jsdoc/require-param-type': 'off',
+		'jsdoc/require-returns': 'off',
+		'prefer-const': 'off'
+	},
+	settings: {
+		'import/resolver': 'eslint-import-resolver-typescript',
+		react: {
+			version: 'detect'
 		}
 	}
-];
+});

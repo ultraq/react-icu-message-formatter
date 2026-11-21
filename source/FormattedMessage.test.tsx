@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import FormattedMessage from './FormattedMessage.jsx';
-import MessageFormatterProvider from './MessageFormatterProvider.jsx';
+import FormattedMessage from './FormattedMessage.tsx';
+import MessageFormatterProvider from './MessageFormatterProvider.tsx';
 
 import {render, screen} from '@testing-library/react';
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
@@ -28,7 +28,7 @@ describe('FormattedMessage', function() {
 
 	test('Documentation example', function() {
 		const formatter = new MessageFormatter('en-NZ', {
-			currency: ({value, currency}, options, values, locale) => {
+			currency: ({value, currency}, _matches, locale) => {
 				return new Intl.NumberFormat(locale, {
 					style: 'currency',
 					currency
@@ -83,6 +83,7 @@ describe('FormattedMessage', function() {
 		const messages = {
 			GREETING: 'Hi! 👋'
 		};
+		// @ts-expect-error
 		const messageResolver = vi.fn((id) => messages[id]);
 		render(
 			<MessageFormatterProvider formatter={formatter} messageResolver={messageResolver}>

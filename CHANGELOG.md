@@ -6,6 +6,7 @@ Changelog
  - Minimum supported version of Node is now 22
  - This library now pure ESM and cannot be `require`d from CommonJS projects,
    and the browser script can only be used from ESM-capable browsers
+ - The project source is now written in TypeScript
 
 ### 0.12.0
  - Minimum supported version of Node is now 20

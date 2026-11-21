@@ -4,7 +4,7 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'happy-dom',
-		setupFiles: ['./vitest.setup.js'],
+		setupFiles: ['./vitest.setup.ts'],
 		coverage: {
 			enabled: true
 		}

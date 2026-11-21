@@ -14,39 +14,27 @@
  * limitations under the License.
  */
 
-import MessageFormatterProvider from './MessageFormatterProvider.jsx';
-import useMessageFormatter from './useMessageFormatter.js';
+import MessageFormatterProvider from './MessageFormatterProvider.tsx';
 
-import {renderHook} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import React from 'react';
 
 /**
- * Tests for the useMessageFormatter hook.
+ * Tests for the message formatter context provider.
  */
-describe('useMessageFormatter', function() {
-	const formatter = new MessageFormatter('en-US');
-	const messages = {
-		GOODBYE: '😢'
-	};
+describe('MessageFormatterProvider', function() {
 
-	// eslint-disable-next-line jsdoc/require-jsdoc
-	function Wrapper({children}) {
-		return (
-			<MessageFormatterProvider formatter={formatter} messages={messages}>
-				{children}
+	test('Warning thrown when both messageResolver and messages props are used', function() {
+		let consoleWarn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+		render(
+			<MessageFormatterProvider formatter={new MessageFormatter('en-NZ')} messageResolver={vi.fn()} messages={{}}>
+				<div/>
 			</MessageFormatterProvider>
 		);
-	}
-
-	test('Context values are returned', function() {
-		const {result} = renderHook(() => useMessageFormatter(), {
-			wrapper: Wrapper
-		});
-
-		expect(result.current).toEqual({
-			formatter,
-			messages
-		});
+		expect(consoleWarn).toHaveBeenCalledWith(
+			'Both messageResolver and messages props are present - messageResolver will take precedence.'
+		);
+		consoleWarn.mockRestore();
 	});
 });

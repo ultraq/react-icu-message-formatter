@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export {default as FormattedMessage}         from './FormattedMessage.jsx';
-export {default as MessageFormatterProvider} from './MessageFormatterProvider.jsx';
-export {default as useMessageFormatter}      from './useMessageFormatter.js';
-export {default as withMessageFormatter}     from './withMessageFormatter.jsx';
+export {default as FormattedMessage}         from './FormattedMessage.tsx';
+export {default as MessageFormatterProvider} from './MessageFormatterProvider.tsx';
+export {default as useMessageFormatter}      from './useMessageFormatter.ts';
+export {default as withMessageFormatter}     from './withMessageFormatter.tsx';

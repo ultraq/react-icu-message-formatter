@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext from './MessageFormatterContext.js';
+import MessageFormatterContext from './MessageFormatterContext.ts';
 
 import {escapeHtml} from '@ultraq/string-utils';
-import React, {Fragment, memo, useContext} from 'react';
+import {Fragment, type HTMLProps, type JSX, memo, useContext} from 'react';
+
 
 /**
  * Return a copy of the passed object whose string values have been
  * HTML-escaped.
- *
- * @param {Record<string,any>} values
- * @return {Record<string,any>}
  */
-function escapeStringValues(values) {
+function escapeStringValues(values: Record<string, unknown> | undefined): Record<string, unknown> {
 	return values ? Object.keys(values).reduce((acc, key) => {
-		let value = values[key];
+		const value = values[key];
 		acc[key] = typeof value === 'string' ? escapeHtml(value) : value;
 		return acc;
-	}, {}) : {};
+	}, {} as Record<string, unknown>) : {};
 }
 
 /**
@@ -39,15 +37,12 @@ function escapeStringValues(values) {
  * strings are placed into their own array so that a single HTML string,
  * presumably an opening tag, a placeholder value, and a closing tag, can be
  * emitted in one go.
- *
- * @param {string[]} formatParts
- * @return {string[]}
  */
-function groupStrings(formatParts) {
+function groupStrings(formatParts: string[]): (string | string[])[] {
 	return formatParts.flat(Infinity).reduce((acc, part) => {
 		if (typeof part === 'string' || typeof part === 'number') {
 			if (acc.length > 0 && Array.isArray(acc[acc.length - 1])) {
-				acc[acc.length - 1].push(part);
+				(acc[acc.length - 1] as string[]).push(part);
 			}
 			else {
 				acc.push([part]);
@@ -57,12 +52,13 @@ function groupStrings(formatParts) {
 			acc.push(part);
 		}
 		return acc;
-	}, []);
+	}, [] as (string | string[])[]);
 }
 
-/**
- * @typedef {import('react').HTMLProps<HTMLSpanElement> & { id: string; values?: Record<string,any>}} FormattedMessageProps
- */
+interface FormattedMessageProps extends HTMLProps<HTMLSpanElement> {
+	id: string;
+	values?: Record<string, unknown>;
+}
 
 /**
  * React wrapper for the ICU message formatter's `format` method, using the
@@ -73,14 +69,12 @@ function groupStrings(formatParts) {
  * component which could open you up to XSS attacks.
  *
  * @author Emanuel Rabina
- * @param {FormattedMessageProps} props
- * @return {import('react').JSX.Element}
  */
-function FormattedMessage({id, values, ...rest}) {
+function FormattedMessage({id, values, ...rest}: FormattedMessageProps): JSX.Element {
 
 	let {formatter, messages, messageResolver} = useContext(MessageFormatterContext);
 
-	let message;
+	let message = undefined;
 	if (messageResolver) {
 		try {
 			message = messageResolver(id, formatter.locale);
@@ -97,13 +91,14 @@ function FormattedMessage({id, values, ...rest}) {
 	// then consecutive strings are grouped together so they can be emitted as a
 	// single HTML string.  This is because you can't emit unbalanced tags using
 	// `dangerouslySetInnerHTML`.
-	let parts = groupStrings(formatter.process(message, escapeStringValues(values)));
+	const parts = groupStrings(formatter.process(message, escapeStringValues(values)));
 
 	return (
 		<span {...rest}>
 			{parts.map((part, index) => (
 				<Fragment key={index}>
 					{Array.isArray(part) ?
+						// eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
 						<span dangerouslySetInnerHTML={{__html: part.join('')}}/> :
 						part
 					}
