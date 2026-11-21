@@ -18,8 +18,8 @@
 	],
 	"type": "module",
 	"exports": {
-		"types": "./dist/react-icu-message-formatter.d.ts",
-		"default": "./dist/react-icu-message-formatter.js"
+		"types": "./dist/ReactIcuMessageFormatter.d.ts",
+		"default": "./dist/ReactIcuMessageFormatter.js"
 	},
 	"files": [
 		"dist",
@@ -31,7 +31,7 @@
 		"test": "vitest",
 		"build": "rimraf dist && npm run build:dist",
 		"build:dist": "tsc",
-		"typecheck": "attw --pack .",
+		"typecheck": "attw --pack . --profile esm-only",
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
