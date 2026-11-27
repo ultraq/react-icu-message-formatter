@@ -19,7 +19,6 @@ import MessageFormatterContext from './MessageFormatterContext.ts';
 import {escapeHtml} from '@ultraq/string-utils';
 import {Fragment, type HTMLProps, type JSX, memo, useContext} from 'react';
 
-
 /**
  * Return a copy of the passed object whose string values have been
  * HTML-escaped.
@@ -55,7 +54,7 @@ function groupStrings(formatParts: string[]): (string | string[])[] {
 	}, [] as (string | string[])[]);
 }
 
-interface FormattedMessageProps extends HTMLProps<HTMLSpanElement> {
+export interface FormattedMessageProps extends HTMLProps<HTMLSpanElement> {
 	id: string;
 	values?: Record<string, unknown>;
 }

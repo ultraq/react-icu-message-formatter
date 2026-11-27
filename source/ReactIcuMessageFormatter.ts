@@ -15,6 +15,7 @@
  */
 
 export {default as FormattedMessage}         from './FormattedMessage.tsx';
+export type {MessageResolver}                from './MessageFormatterContext.ts';
 export {default as MessageFormatterProvider} from './MessageFormatterProvider.tsx';
 export {default as useMessageFormatter}      from './useMessageFormatter.ts';
 export {default as withMessageFormatter}     from './withMessageFormatter.tsx';

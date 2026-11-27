@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext from './MessageFormatterContext.ts';
-import type {MessageResolver} from './Types.js';
+import MessageFormatterContext, {type MessageResolver} from './MessageFormatterContext.ts';
 
 import type {MessageFormatter} from '@ultraq/icu-message-formatter';
 import React, {type JSX, memo, type ReactNode, useEffect} from 'react';
 
-interface MessageFormatterProviderProps {
+export interface MessageFormatterProviderProps {
 	children: ReactNode;
 	formatter: MessageFormatter;
 	messages?: Record<string, string>;

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import type {MessageResolver} from './Types.ts';
-
 import {MessageFormatter} from '@ultraq/icu-message-formatter';
 import {createContext} from 'react';
 
 const defaultFormatter = new MessageFormatter('en-NZ');
 const defaultMessages = {};
+
+export type MessageResolver = (id: string, locale: string) => string;
 
 export type MessageFormatterContextValue = {
 	formatter: MessageFormatter,
