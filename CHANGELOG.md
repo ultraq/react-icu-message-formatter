@@ -7,6 +7,8 @@ Changelog
  - This library now pure ESM and cannot be `require`d from CommonJS projects,
    and the browser script can only be used from ESM-capable browsers
  - The project source is now written in TypeScript
+ - Peer dependency for `@ultraq/icu-message-formatter` updated to `^0.16.0`,
+   which includes many of the same changes as above
 
 ### 0.12.0
  - Minimum supported version of Node is now 20
