@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import MessageFormatterContext, {type MessageResolver} from './MessageFormatterContext.ts';
+import MessageFormatterContext from './MessageFormatterContext.ts';
+import type {MessageResolver} from './MessageResolver.js';
 
 import type {MessageFormatter} from '@ultraq/icu-message-formatter';
 import React, {type JSX, memo, type ReactNode, useEffect} from 'react';

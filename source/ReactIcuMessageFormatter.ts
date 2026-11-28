@@ -17,5 +17,6 @@
 export * from './FormattedMessage.tsx';
 export * from './MessageFormatterContext.ts';
 export * from './MessageFormatterProvider.tsx';
+export * from './MessageResolver.ts';
 export * from './useMessageFormatter.ts';
 export * from './withMessageFormatter.tsx';
