@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-export {default as FormattedMessage}         from './FormattedMessage.tsx';
-export type {MessageResolver}                from './MessageFormatterContext.ts';
-export {default as MessageFormatterProvider} from './MessageFormatterProvider.tsx';
-export {default as useMessageFormatter}      from './useMessageFormatter.ts';
-export {default as withMessageFormatter}     from './withMessageFormatter.tsx';
+export * from './FormattedMessage.tsx';
+export * from './MessageFormatterContext.ts';
+export * from './MessageFormatterProvider.tsx';
+export * from './useMessageFormatter.ts';
+export * from './withMessageFormatter.tsx';
